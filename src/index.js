@@ -7,16 +7,13 @@ import { ReactiveBase } from '@appbaseio/reactivesearch';
 
 import Home from './views/home'
 
+import Profile from './views/profile/profile'
+
 const AppWithRoutes = () => (
-    <ReactiveBase
-        app="earthquake"
-        credentials="X8RsOu0Lp:9b4fe1a4-58c6-4089-a042-505d86d9da30"
-        type="listing"
-    >
-        <Router>
-            <Route path="/" exact component={Home} />
-        </Router>
-    </ReactiveBase>
+    <Router>
+        <Route path="/" exact component={Home} />
+        <Route path="/orgProfile" exact component={Profile} />
+    </Router>
 )
 
 ReactDOM.render(<AppWithRoutes />, document.getElementById('root'));
