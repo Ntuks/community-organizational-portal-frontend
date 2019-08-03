@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Home from './components/home'
+import Home from './views/home'
 
 const AppWithRoutes = () => (
     <Router>
