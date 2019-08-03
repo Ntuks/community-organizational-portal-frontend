@@ -5,9 +5,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Home from './views/home'
 
+import Profile from './views/profile/profile'
+
 const AppWithRoutes = () => (
     <Router>
         <Route path="/" exact component={Home} />
+        <Route path="/orgProfile" exact component={Profile} />
     </Router>
 )
 

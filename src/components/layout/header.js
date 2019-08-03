@@ -26,8 +26,8 @@ function Header(props) {
           <Typography variant="h6" className={classes.title}>
             {props.title}
           </Typography>
-          <Button color="inherit">Organization Sign Up</Button>
-          <Button color="inherit">Organization Sign In</Button>
+          <Button color="inherit">Sign Up <br /> as Organization </Button>
+          <Button color="inherit">Sign In <br /> Organization </Button>
         </Toolbar>
       </AppBar>
     )
