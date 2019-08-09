@@ -25,7 +25,7 @@ export default () => {
 
     return (
         <div>
-            <Header />
+            <Header pageTitle= "home"/>
             <Grid align="center" className={classes.searchGrid} item xs={12}>
                 <Search />
             </Grid>
