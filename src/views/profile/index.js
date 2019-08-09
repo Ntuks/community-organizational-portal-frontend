@@ -5,21 +5,37 @@ import ProfileAbout from './ProfileAbout'
 import ProfileTimeline from './ProfileTimeline'
 
 
-
-export class Profile extends Component {
-    render() {
+const Profile  = (props) => {
+        var isOwner = props.location.pathname==="/myProfile"? true:false
+        console.log(props);
         return (
-            <div>
-                <Header pageTitle ="orgProfile"/>
-                <div className="content-container">
-                    <ProfileBanner/>
-                    <ProfileAbout/>
-                    <ProfileTimeline/>
+            <div className="content-container-parent">
+                <div className="content-container-header">
+                    <Header pageTitle ="orgProfile" />
                 </div>
-                <Footer />
+                
+                <div className="content-container">
+                    <div className="content-container-child">
+                        <ProfileBanner/>
+                        <br></br>
+                        <div className="row">
+                                <div className="col-lg-4">
+                                        <ProfileAbout />
+                                </div>
+                                <div className="col-lg-8">
+                                        <ProfileTimeline isOwner = {isOwner}/>
+                                </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                {//<div className="content-container-footer">
+                   // <Footer/> 
+                //</div>
+                }
             </div>
         )
     }
-}
 
 export default Profile

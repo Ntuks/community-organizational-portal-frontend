@@ -47,7 +47,7 @@ export default function MediaCard() {
             </Grid>
         </CardMedia>
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h3" component="h2">
             SPCA - Society for the Prevention of Cruelty to Animals
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">

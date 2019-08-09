@@ -1,7 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ProfileTimeline extends Component {
-    render() {
-        return (<h1> Profile Timeline</h1>)
-    }
+import ProfileCreatePost from './ProfileCreatePost' 
+import ProfilePost from './ProfilePost';
+
+export default function SimpleContainer(props) {
+  return (
+        <div className = "scrollableContainer">
+        {props.isOwner && <ProfileCreatePost/>}
+        <ProfilePost/>
+        <ProfilePost/>
+
+        </div>
+        
+  );
 }

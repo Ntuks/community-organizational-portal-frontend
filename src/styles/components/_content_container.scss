@@ -1,6 +1,23 @@
 .content-container {
-    margin: 0 auto;
-    padding: 0 $m-size;
-    max-width: 100rem;
+    height: 90%;
+    flex-grow: 1;
+    .content-container-child{
+        margin: 0 auto;
+        padding: 0 $m-size;
+        max-width: $containerREM;
+        height: 90%;
+      }
+
   }
-  
+  .content-container-header {
+    height: 10%;
+  }
+  /*
+  .content-container-footer{
+    y-min: calc(100vh - 90vh) ;
+  }
+  */
+.content-container-parent{
+    flex-grow: 1;
+    height: 100%
+  }

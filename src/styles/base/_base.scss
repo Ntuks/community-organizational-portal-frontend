@@ -1,12 +1,21 @@
+#root, #root>div{
+  height: 100%;
+}
+
 
 html {
     font-size: 62.5%;
+    margin: 0 ;
+    padding: 0;
+    height: 100vh;
   }
   
   body {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: $m-size;
+
     line-height: 1.6;
+    margin: 0 ;
+    padding: 0;
+    height: 100vh;
   }
   
   button {

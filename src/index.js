@@ -13,6 +13,7 @@ const AppWithRoutes = () => (
     <Router>
         <Route path="/" exact component={Home} />
         <Route path="/orgProfile" exact component={Profile} />
+        <Route path="/myProfile" exact component={Profile} />
     </Router>
 )
 

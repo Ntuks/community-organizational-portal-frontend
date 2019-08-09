@@ -1,5 +1,4 @@
 @import './md-colors';
-@import './themes';
 
 // Colors
 $dark-grey: #333;
@@ -16,6 +15,7 @@ $m-size: 1.6rem;
 $l-size: 3.2rem;
 $xl-size: 4.8rem;
 $desktop-breakpoint: 45rem;
+$containerREM: 100rem;
 
 
 // bootstrap override
