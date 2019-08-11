@@ -26,7 +26,7 @@ export default function OrgCard() {
     const classes = useStyles();
     return (
         <Grid item xs={12}>
-            <CardActionArea component="a" href="#">
+            <CardActionArea component="a" href="/orgProfile">
                 <Card className={classes.card}>
                     <Hidden xsDown>
                         <CardMedia

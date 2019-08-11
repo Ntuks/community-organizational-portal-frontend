@@ -174,7 +174,7 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    history.push('/');
+    history.push('/myProfile');
   };
 
   const hasError = field =>
