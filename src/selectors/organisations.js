@@ -3,7 +3,7 @@
 
 export default (organisations, {text}) => {
   return organisations.filter((organisation) => {
-    const textMatch = organisation.description.toLowerCase().includes(text.toLowerCase());
+    const textMatch = organisation.title.toLowerCase().includes(text.toLowerCase());
 
     return textMatch;
   })

@@ -5,7 +5,9 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
+import { connect } from 'react-redux';
 
+import { setTextFilter } from '../actions/filters';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -25,8 +27,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Search() {
+export const Search = (props) =>{
     const classes = useStyles();
+
+    const onTextChange = (e) => {
+        props.setTextFilter(e.target.value);
+      };
 
     return (
         <Paper className={classes.root}>
@@ -37,6 +43,8 @@ export default function Search() {
                 className={classes.input}
                 placeholder="Search Community Organizations"
                 inputProps={{ 'aria-label': 'search google maps' }}
+                value={props.filters.text}
+                onChange={onTextChange}
             />
             <IconButton className={classes.iconButton} aria-label="search">
                 <SearchIcon />
@@ -44,3 +52,15 @@ export default function Search() {
         </Paper>
     );
 }
+
+const mapStateToProps = (state) => ({
+    filters: state.filters
+  });
+  
+  const mapDispatchToProps = (dispatch) => ({
+    setTextFilter: (text) => dispatch(setTextFilter(text)),
+
+  });
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Search);
+  
