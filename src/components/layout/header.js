@@ -21,6 +21,11 @@ const useStyles = makeStyles(theme => ({
       background: "none",
       "text-decoration": "none",
       color: "white",
+      border: "solid",
+      "border-colour": "white",
+      "border-width": "thin",
+      "border-radius": "5px",
+      "padding": "10px",
     },
   }));
 
@@ -36,8 +41,16 @@ function Header(props) {
           {(props.pageTitle === "home") 
           ? 
           <div> 
-            <Button color="inherit">Sign Up <br /> as Organization </Button>
-            <Button color="inherit">Sign In <br /> Organization </Button>
+          <Typography variant="h6" className={classes.title}>
+              <Link to = "/sign-up" className={classes.link}>
+                Organisation Sign Up 
+              </Link>
+              <Link to = "/sign-in" className={classes.link}>
+                Organisation Sign In 
+              </Link>
+          </Typography>
+
+            
           </div>
           : 
           null
