@@ -5,16 +5,30 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ReactiveBase } from '@appbaseio/reactivesearch';
 import './styles/styles.scss';
 
-import Home from './views/home'
+import { ThemeProvider } from '@material-ui/styles';
+import theme from './theme';
+import validate from 'validate.js';
+import validators from './common/validators';
 
+import Home from './views/home'
 import Profile from './views/profile'
+import Login from './views/auth/login'
+
+
+validate.validators = {
+    ...validate.validators,
+    ...validators
+  };
 
 const AppWithRoutes = () => (
-    <Router>
-        <Route path="/" exact component={Home} />
-        <Route path="/orgProfile" exact component={Profile} />
-        <Route path="/myProfile" exact component={Profile} />
-    </Router>
+    <ThemeProvider theme={theme}>
+        <Router>
+            <Route path="/" exact component={Home} />
+            <Route path="/orgProfile" exact component={Profile} />
+            <Route path="/myProfile" exact component={Profile} />
+            <Route path="/login" exact component={Login} />
+        </Router>
+    </ThemeProvider>
 )
 
 ReactDOM.render(<AppWithRoutes />, document.getElementById('root'));
