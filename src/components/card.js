@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function OrgCard() {
+export default function OrgCard(props) {
     const classes = useStyles();
     return (
         <Grid item xs={12}>
@@ -31,20 +31,20 @@ export default function OrgCard() {
                     <Hidden xsDown>
                         <CardMedia
                             className={classes.cardMedia}
-                            image="https://source.unsplash.com/random"
+                            image={ props.imagelink || "https://source.unsplash.com/random"}
                             title="Image title"
                         />
                     </Hidden>
                     <div className={classes.cardDetails}>
                         <CardContent>
                             <Typography component="h2" variant="h5">
-                                "Title"
+                            {props.title || "Title"}
                         </Typography>
                             <Typography variant="subtitle1" color="textSecondary">
-                                "date"
+                            {props.date || "date"}
                         </Typography>
                             <Typography variant="subtitle1" paragraph>
-                                description
+                            {props.description || "description"}
                         </Typography>
                             <Typography variant="subtitle1" color="primary">
                                 Continue reading...

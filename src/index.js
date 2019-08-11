@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ReactiveBase } from '@appbaseio/reactivesearch';
 import './styles/styles.scss';
 
 import { ThemeProvider } from '@material-ui/styles';
+import configureStore from './store/configureStore';
 import theme from './theme';
+
 import validate from 'validate.js';
 import validators from './common/validators';
 
@@ -20,16 +24,21 @@ validate.validators = {
     ...validators
   };
 
+const store = configureStore();
+
 const AppWithRoutes = () => (
-    <ThemeProvider theme={theme}>
-        <Router>
-            <Route path="/" exact component={Home} />
-            <Route path="/orgProfile" exact component={Profile} />
-            <Route path="/myProfile" exact component={Profile} />
-            <Route path="/sign-in" exact component={Login} />
-            <Route path="/sign-up" exact component={Register} />
-        </Router>
-    </ThemeProvider>
+    <Provider store={store}>
+        <ThemeProvider theme={theme} >
+            <Router>
+                <Route path="/" exact component={Home} />
+                <Route path="/orgProfile" exact component={Profile} />
+                <Route path="/myProfile" exact component={Profile} />
+                <Route path="/sign-in" exact component={Login} />
+                <Route path="/sign-up" exact component={Register} />
+            </Router>
+        </ThemeProvider>
+    </Provider>
+
 )
 
 ReactDOM.render(<AppWithRoutes />, document.getElementById('root'));

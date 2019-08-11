@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import { Header, Footer } from '../../components/layout'
 import Search from '../../components/search'
 import OrganizationsList from '../../components/organizationslist'
