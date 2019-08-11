@@ -13,7 +13,7 @@ import validators from './common/validators';
 import Home from './views/home'
 import Profile from './views/profile'
 import Login from './views/auth/login'
-
+import Register from './views/auth/register'
 
 validate.validators = {
     ...validate.validators,
@@ -26,7 +26,8 @@ const AppWithRoutes = () => (
             <Route path="/" exact component={Home} />
             <Route path="/orgProfile" exact component={Profile} />
             <Route path="/myProfile" exact component={Profile} />
-            <Route path="/login" exact component={Login} />
+            <Route path="/sign-in" exact component={Login} />
+            <Route path="/sign-up" exact component={Register} />
         </Router>
     </ThemeProvider>
 )

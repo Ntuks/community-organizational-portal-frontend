@@ -13,6 +13,8 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
+import { Header, Footer } from '../../components/layout'
+
 import { Facebook as FacebookIcon, Google as GoogleIcon } from '../../icons';
 
 const schema = {
@@ -180,6 +182,7 @@ const SignIn = props => {
 
   return (
     <div className={classes.root}>
+      <Header/>
       <Grid
         className={classes.grid}
         container
@@ -195,7 +198,7 @@ const SignIn = props => {
                 className={classes.quoteText}
                 variant="h1"
               >
-                Share your community with the world.
+                Log in and share your community with the world.
               </Typography>
             </div>
           </div>
@@ -280,7 +283,8 @@ const SignIn = props => {
           </div>
         </Grid>
       </Grid>
-    </div>
+      <Footer/>
+      </div>
   );
 };
 
