@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import { Header, Footer } from '../../components/layout'
 import Search from '../../components/search'
 import OrganizationsList from '../../components/organizationslist'
@@ -25,7 +26,7 @@ export default () => {
 
     return (
         <div>
-            <Header />
+            <Header pageTitle= "home"/>
             <Grid align="center" className={classes.searchGrid} item xs={12}>
                 <Search />
             </Grid>
