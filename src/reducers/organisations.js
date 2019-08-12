@@ -34,6 +34,7 @@ const WCFID = new Organization(
 
 
 // OrganisationDetails Reducer
+
 const organisationsReducerDefaultState = [
   SPCA.getObject(),
   CANSA.getObject(),
