@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './map_marker';
- 
+
 class Map extends Component {
   static defaultProps = {
     center: {
@@ -10,8 +10,6 @@ class Map extends Component {
     },
     zoom: 11
   };
-
-  
  
   render() {
     return (
@@ -41,5 +39,5 @@ class Map extends Component {
     );
   }
 }
- 
+
 export default Map;
