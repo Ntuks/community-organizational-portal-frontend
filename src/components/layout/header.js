@@ -22,7 +22,6 @@ function Header(props) {
     return (
         <AppBar position="static">
         <Toolbar>
-          
           <Typography variant="h6" className={classes.title}>
             {props.title}
           </Typography>
