@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
     paddingTop: 10,
-    width: "300px",
+    width: "320px",
   },
   pos: {
     marginBottom: 12,
