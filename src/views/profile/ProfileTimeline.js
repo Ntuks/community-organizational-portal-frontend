@@ -9,7 +9,7 @@ export default function SimpleContainer(props) {
         {props.isOwner && <ProfileCreatePost/>}
         <ProfilePost/>
         <ProfilePost/>
-
+        <ProfilePost/>
         </div>
         
   );
