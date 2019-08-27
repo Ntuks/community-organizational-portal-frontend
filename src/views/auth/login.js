@@ -15,8 +15,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { Header, Footer } from '../../components/layout'
 
-import { Facebook as FacebookIcon, Google as GoogleIcon } from '../../icons';
-
 const schema = {
   email: {
     presence: { allowEmpty: false, message: 'is required' },
@@ -174,7 +172,7 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    history.push('/myProfile');
+    history.push('/myProfile:CANSA');
   };
 
   const hasError = field =>

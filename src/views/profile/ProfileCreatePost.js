@@ -120,7 +120,6 @@ export default function SimpleCard() {
               <InputLabel htmlFor="postType" className={classes.inputLabel}>PostType: </InputLabel>
               <Select
                   className = {classes.select}
-                  defaultValue='none'
                   value={values.postType}
                   onChange={handleChange}
                   inputProps={{
@@ -214,14 +213,13 @@ export default function SimpleCard() {
         </div>)}
       </div>
       
-      <textArea 
+      <textarea 
       name="postDescription"
       className="textArea" 
       color="textSecondary" 
-      gutterBottom 
       onChange={handleChange}
       placeholder = "Post Description - Tell us more about your post">
-      </textArea>
+      </textarea>
       </CardContent>
 
       <CardActions>

@@ -28,10 +28,16 @@ const useStyles = makeStyles({
     margin: 10,
     width: 200,
     height: 200,
+    backgroundColor: "white",
+    border: "1px solid grey"
   },
+  img: {
+    maxWidth: "100%",
+    maxHeight: "100%",
+  }
 });
 
-export default function MediaCard() {
+export default function MediaCard(props) {
   const classes = useStyles();
 
   return (
@@ -42,16 +48,16 @@ export default function MediaCard() {
           image="/static/images/generic/bluewhitebanner.jpg"
           title="ProfileBanner"  
         >
-            <Grid container justify="left" alignItems="bottom">
-                <Avatar alt="Remy Sharp" src="/static/images/generic/spca.gif" className={classes.bigAvatar} />
+            <Grid>
+                <Avatar alt="IMG" src={`${props.organisation.imagelink}`} className={classes.bigAvatar} />
             </Grid>
         </CardMedia>
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h3" component="h2">
-            SPCA - Society for the Prevention of Cruelty to Animals
+                {props.organisation.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-             Our mission to prevent cruelty to animals. This is done through education, law enforcement, veterinary care services an Animal Care Centre, Horse Care and Farmyard Unit, and Wildlife Facility.
+                  {props.organisation.tagline}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -30,8 +30,8 @@ const AppWithRoutes = () => (
         <ThemeProvider theme={theme} >
             <Router>
                 <Route path="/" exact component={Home} />
-                <Route path="/orgProfile" exact component={Profile} />
-                <Route path="/myProfile" exact component={Profile} />
+                <Route path="/orgProfile:orgName" exact component={Profile} />
+                <Route path="/myProfile:id" exact component={Profile} />
                 <Route path="/sign-in" exact component={Login} />
                 <Route path="/sign-up" exact component={Register} />
             </Router>
