@@ -13,15 +13,19 @@ import theme from './theme';
 import validate from 'validate.js';
 import validators from './common/validators';
 
-import Home from './views/home'
-import Profile from './views/profile'
-import Login from './views/auth/login'
-import Register from './views/auth/register'
+import Home from './views/home';
+import Profile from './views/profile';
+import Login from './views/auth/login';
+import Register from './views/auth/register';
+
+import 'dotenv/config';
+
 
 validate.validators = {
     ...validate.validators,
     ...validators
   };
+
 
 const store = configureStore();
 

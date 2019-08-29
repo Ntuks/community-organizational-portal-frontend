@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import selectOrganisations from '../../selectors/organisations';
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+import Autocomplete from 'react-google-autocomplete';
+import zIndex from '@material-ui/core/styles/zIndex';
+
+import Geocode from "react-geocode";
+Geocode.setApiKey(process.env.GOOGLE_MAPS_API);
+Geocode.enableDebug();
+
+
+
+
 
 const useStyles = makeStyles(theme => ({
     postStructure:{
@@ -44,6 +55,24 @@ const organisation =props.organisation;
     facebookPagelink: organisation.facebookLink||"",
   });
 
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `You clicked test times`;
+    console.log('didmount')
+    Geocode.fromAddress("Eiffel Tower").then(
+      response => {
+        console.log(response)
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log(lat, lng);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
+
+  });
+
   function handleChange(event) {
     event.persist();
     setValues(oldValues => ({
@@ -53,9 +82,7 @@ const organisation =props.organisation;
   } 
 
   return (
-    
-    <div>
-        
+    <div className="setZIndex">
         <TextField placeholder="Organisation Name"
         className={classes.title}
         name="organisationName"
@@ -94,7 +121,23 @@ const organisation =props.organisation;
         value={values.location}
         onChange={handleChange}
         >
+        
         </TextField>
+        <div className="ui-autocomplete">
+        <Autocomplete
+            style={{
+              width: '90%'
+            }}
+            onPlaceSelected={(place) => {
+              console.log(place.geometry.location.lat(), place.geometry.location.lng());
+            }}
+            types={['geocode']}
+            componentRestrictions={{country: "za"}}
+        />
+        </div>
+        
+
+        
 
         <TextField placeholder="pboNpoNumber"
         className={classes.title}
