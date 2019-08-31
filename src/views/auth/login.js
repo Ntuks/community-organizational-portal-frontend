@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login, startLogin } from '../../actions/auth';
+import {history} from '../../routers/AppRouter'
+
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -126,7 +130,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignIn = props => {
-  const { history } = props;
+  //const { history} = props;
 
   const classes = useStyles();
 
@@ -170,9 +174,23 @@ const SignIn = props => {
     }));
   };
 
-  const handleSignIn = event => {
+  const handleLogIn = event => {
     event.preventDefault();
-    history.push('/myProfile:CANSA');
+    startLogin({email:formState.values.email ,password:formState.values.password}).then((loginState)=>{
+      
+      if(!('message' in loginState)){
+        props.login(loginState);
+        history.push('/home')
+      }
+      else if (('message' in loginState)){
+        alert(loginState.message)
+      }
+      else{
+        alert(loginState)
+      }
+      
+    })
+    
   };
 
   const hasError = field =>
@@ -216,7 +234,7 @@ const SignIn = props => {
             <div className={classes.contentBody}>
               <form
                 className={classes.form}
-                onSubmit={handleSignIn}
+                onSubmit={handleLogIn}
               >
                 <Typography
                   className={classes.title}
@@ -286,8 +304,14 @@ const SignIn = props => {
   );
 };
 
-SignIn.propTypes = {
-  history: PropTypes.object
-};
+// SignIn.propTypes = {
+//   history: PropTypes.object
+// };
 
-export default withRouter(SignIn);
+//const signInComponent =  withRouter(SignIn);
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (loginObj) => dispatch(login(loginObj))
+});
+
+export default connect(undefined, mapDispatchToProps)(SignIn);

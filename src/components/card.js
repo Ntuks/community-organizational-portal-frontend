@@ -7,6 +7,7 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Hidden from '@material-ui/core/Hidden'
+import {history} from '../routers/AppRouter'
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -24,9 +25,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function OrgCard(props) {
     const classes = useStyles();
+    const handleOnClick = event => {
+        event.preventDefault();
+        history.push(`/orgProfile:${props.title}`)
+    }
     return (
         <Grid item xs={12}>
-            <CardActionArea component="a" href={`/orgProfile:${props.title}`}>
+            <CardActionArea component="a" onClick ={handleOnClick}>
                 <Card className={classes.card}>
                     <Hidden xsDown>
                         <CardMedia

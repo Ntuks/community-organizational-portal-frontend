@@ -26,7 +26,7 @@ const store = configureStore();
 const AppWithRoutes = () => (
     <Provider store={store}>
         <ThemeProvider theme={theme} >
-            <AppRouter />
+            <AppRouter   />
         </ThemeProvider>
     </Provider>
 
