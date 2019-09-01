@@ -52,26 +52,9 @@ const organisation =props.organisation;
     facebookPagelink: organisation.facebookLink||"",
   });
 
-  useEffect(() => {
-    // Update the document title using the browser API
-    document.title = `You clicked test times`;
-    console.log('didmount')
-    Geocode.fromAddress("Eiffel Tower").then(
-      response => {
-        console.log(response)
-        const { lat, lng } = response.results[0].geometry.location;
-        console.log(lat, lng);
-      },
-      error => {
-        console.error(error);
-      }
-    );
-
-
-  });
-
   function handleChange(event) {
     event.persist();
+    console.log('123123213213',event)
     setValues(oldValues => ({
       ...oldValues,
       [event.target.name]: event.target.value,
@@ -81,17 +64,33 @@ const organisation =props.organisation;
   // Handle suggestions for dropdown of locations
   // stores lats & longs
   function onSuggestionSelected(suggestion) {
+    console.log(suggestion);
     geocodeByPlaceID(suggestion.place_id).then((results) => {
       const { geometry } = results[0]
       const coordinates = {
         lat: geometry.location.lat(),
         lng: geometry.location.lng(),
       }
+
+      //need to set state based on whats selected from dropdown
+      setValues(oldValues => ({
+        ...oldValues,
+        'location': suggestion.description,
+      }));
       console.log(coordinates);
     }).catch((err) => {
       console.log(err)
     })
   }
+
+  function createAutocompleteRequest(inputValue) {
+    return {
+      input: inputValue,
+      componentRestrictions: {country: "za"},
+    }
+  }
+
+  
 
   return (
     <div>
@@ -126,7 +125,7 @@ const organisation =props.organisation;
         onChange={handleChange}
         >
         </TextField>
-
+{/* 
         <TextField placeholder="location"
         className={classes.title}
         name="location"
@@ -134,17 +133,27 @@ const organisation =props.organisation;
         onChange={handleChange}
         >
         
-        </TextField>
+        </TextField> */}
 
         {/** Purely for styling purposes */}
         <div style={{
-          'padding-top': '10px',
+          'paddingTop': '10px',
         }} />
         {/** Purely for styling purposes */}
 
         <MUIPlacesAutocomplete
+          textFieldProps={{ 
+            value: values.location,
+            placeholder: 'location',
+            onChange: handleChange,
+            name: 'location',
+            style: {
+              width: "100%"
+            }
+          }}
           onSuggestionSelected={onSuggestionSelected}
-          renderTarget={() => console.log('wowawdas')}
+          renderTarget={() => (<div />)}
+          createAutocompleteRequest={createAutocompleteRequest}
         />   
 
         <TextField placeholder="pboNpoNumber"
