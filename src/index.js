@@ -25,14 +25,18 @@ validate.validators = {
 
 const store = configureStore();
 
-const AppWithRoutes = () => (
-    <Provider store={store}>
-        <ThemeProvider theme={theme} >
-            <AppRouter   />
-        </ThemeProvider>
-    </Provider>
+const AppWithRoutes = () => {
 
-)
+    return(
+        <Provider store={store}>
+            <ThemeProvider theme={theme} >
+                <AppRouter   />
+            </ThemeProvider>
+        </Provider>
+    
+    )
+}
+
 
 ReactDOM.render(<AppWithRoutes />, document.getElementById('root'));
 
