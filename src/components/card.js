@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
@@ -7,7 +8,8 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Hidden from '@material-ui/core/Hidden'
-import { withRouter } from "react-router";
+
+import { startActivateOrg } from '../actions/organisations'
 
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -27,14 +29,15 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function OrgCard({ title, imagelink, date, description, admin=false, status }) {
+function OrgCard({ title, imagelink, date, description, admin=false, status, id, startActivateOrg }) {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
         slider: false,
     });
     const handleChange = name => event => {
-        console.log(event.target.checked)
+        const status = event.target.checked ? 'active' : 'inactive'
+        startActivateOrg(title, status)
         setState({ ...state, [name]: event.target.checked });
     };
 
@@ -88,4 +91,9 @@ function OrgCard({ title, imagelink, date, description, admin=false, status }) {
     )
 }
 
-export default withRouter(OrgCard);
+const mapDispatchToProps = (dispatch) => ({
+    startActivateOrg: (id, status) => dispatch(startActivateOrg(id, status)),
+    // setInactiveFilter: (inactive) => dispatch(setInactiveFilter(inactive))
+});
+
+export default connect(null, mapDispatchToProps)(OrgCard);

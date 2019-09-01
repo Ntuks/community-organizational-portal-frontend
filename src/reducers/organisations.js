@@ -87,7 +87,8 @@ export default (state = organisationsReducerDefaultState, action) => {
       return action.organisations;
     case 'ACTIVATE_ORG':
       return state.map((organisation) => {
-        if (organisation.id === action.id) {
+        if (organisation.title === action.id) { //title is only temporary, need to change to ID
+          console.log('in here')
           return {
             ...organisation,
             status: action.status

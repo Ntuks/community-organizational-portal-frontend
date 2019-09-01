@@ -80,7 +80,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     setActiveFilter: (active) => dispatch(setActiveFilter(active)),
     setInactiveFilter: (inactive) => dispatch(setInactiveFilter(inactive))
-  });
+});
   
 export default connect(mapStateToProps, mapDispatchToProps)(AdminFilters);
   

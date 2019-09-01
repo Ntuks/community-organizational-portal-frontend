@@ -71,13 +71,15 @@ export const startSetOrganisation = () => {
   };
 };
 
-export const FilterByActive = (status) => ({
-  type: 'SHOW_ACTIVATED',
+export const activateOrg = (id, status) => ({
+  type: 'ACTIVATE_ORG',
+  id,
   status
 });
-export const startFilterByActive = (status) => {
+export const startActivateOrg = (id, status) => {
+  console.log(id, 'testing')
   return (dispatch, getState) => {
-    dispatch(FilterByActive(status))
+    dispatch(activateOrg(id, status))
   };
 };
 
