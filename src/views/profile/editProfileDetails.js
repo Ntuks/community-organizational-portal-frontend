@@ -5,6 +5,12 @@ import { OrganizationsBySearch } from '../../selectors/organisations';
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Geocode from "react-geocode";
+import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete'
+
+Geocode.setApiKey(process.env.GOOGLE_MAPS_API);
+Geocode.enableDebug();
+
 const useStyles = makeStyles(theme => ({
     postStructure:{
         display: 'flex',
@@ -46,16 +52,46 @@ const organisation =props.organisation;
 
   function handleChange(event) {
     event.persist();
+    console.log('123123213213',event)
     setValues(oldValues => ({
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
   } 
 
+  // Handle suggestions for dropdown of locations
+  // stores lats & longs
+  function onSuggestionSelected(suggestion) {
+    console.log(suggestion);
+    geocodeByPlaceID(suggestion.place_id).then((results) => {
+      const { geometry } = results[0]
+      const coordinates = {
+        lat: geometry.location.lat(),
+        lng: geometry.location.lng(),
+      }
+
+      //need to set state based on whats selected from dropdown
+      setValues(oldValues => ({
+        ...oldValues,
+        'location': suggestion.description,
+      }));
+      console.log(coordinates);
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
+  function createAutocompleteRequest(inputValue) {
+    return {
+      input: inputValue,
+      componentRestrictions: {country: "za"},
+    }
+  }
+
+  
+
   return (
-    
     <div>
-        
         <TextField placeholder="Organisation Name"
         className={classes.title}
         name="organisationName"
@@ -87,14 +123,31 @@ const organisation =props.organisation;
         onChange={handleChange}
         >
         </TextField>
-
+{/* 
         <TextField placeholder="location"
         className={classes.title}
         name="location"
         value={values.location}
         onChange={handleChange}
         >
-        </TextField>
+        
+        </TextField> */}
+
+        <MUIPlacesAutocomplete
+          textFieldProps={{ 
+            value: values.location,
+            placeholder: 'location',
+            onChange: handleChange,
+            name: 'location',
+            style: {
+              width: "100%",
+              'paddingTop': '10px',
+            }
+          }}
+          onSuggestionSelected={onSuggestionSelected}
+          renderTarget={() => (<div />)}
+          createAutocompleteRequest={createAutocompleteRequest}
+        />   
 
         <TextField placeholder="pboNpoNumber"
         className={classes.title}

@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 import { setTextFilter } from '../actions/filters';
 
+
 const useStyles = makeStyles(theme => ({
     root: {
         padding: '10px 6px',

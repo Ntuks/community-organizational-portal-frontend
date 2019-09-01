@@ -3,9 +3,11 @@ import OrganizationCard from './card';
 import { connect } from 'react-redux';
 import { OrganizationsBySearch } from '../selectors/organisations';
 
+
 export const Organizationslist = (props)=> {
     return (
         <div>
+        
            {//console.log(props)
             }
             

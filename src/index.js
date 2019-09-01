@@ -12,14 +12,24 @@ import theme from './theme';
 import validate from 'validate.js';
 import validators from './common/validators';
 
+<<<<<<< HEAD
 import './styles/styles.scss';
 
+=======
+import Home from './views/home';
+import Profile from './views/profile';
+import Login from './views/auth/login';
+import Register from './views/auth/register';
+
+import 'dotenv/config';
+>>>>>>> map-connect
 
 
 validate.validators = {
     ...validate.validators,
     ...validators
   };
+
 
 const store = configureStore();
 

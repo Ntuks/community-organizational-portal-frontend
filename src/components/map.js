@@ -1,28 +1,38 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './map_marker';
+import { geolocated } from "react-geolocated";
+
 
 class Map extends Component {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 30.55,
+      lng: 22.93
     },
-    zoom: 11
+    zoom: 12
   };
  
   render() {
-    return (
-      <div style={{ height: '100vh', width: '100%' }}>
+
+  return !this.props.isGeolocationAvailable ? (
+    <div>Your browser does not support Geolocation</div>
+) : !this.props.isGeolocationEnabled ? (
+    <div>Geolocation is not enabled</div>
+) : this.props.coords ? (
+    <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyBgJt7BUuH480oR5E8LDZMoW-3AoX3Zi64' }}
-          defaultCenter={this.props.center}
+          bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_API }}
+          defaultCenter={{
+            lat: this.props.coords.latitude,
+            lng: this.props.coords.longitude
+          }}
           defaultZoom={this.props.zoom}
         >
           <Marker
-            lat={59.955413}
-            lng={30.337844}
-            text="SPCA"
+            lat={-33.93812}
+            lng={18.468619999999987}
+            text="TEST"
           />
           <Marker
             lat={65.955413}
@@ -36,8 +46,15 @@ class Map extends Component {
           />
         </GoogleMapReact>
       </div>
-    );
+  ) : (
+    <div>Getting the location data&hellip; </div>
+);
   }
 }
 
-export default Map;
+export default geolocated({
+  positionOptions: {
+      enableHighAccuracy: false,
+  },
+  userDecisionTimeout: 5000,
+})(Map);
