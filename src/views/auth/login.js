@@ -129,7 +129,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignIn = props => {
+const SignIn = ({startLogin, login}) => {
   //const { history} = props;
 
   const classes = useStyles();
@@ -187,31 +187,9 @@ const SignIn = props => {
           
           if (loginState.role==='Organization Manager'){
             //If logged in user is an Org Manager
-
-
-                // Trying to find organisation data to load organisation page.
-
-                //Get request to load organisation data using /:orgToken 
-                axios.get(`http://localhost:2876/api/v1/organization/${loginState.organization}`).then((response)=>{ 
-                    const orgData =  response.data;  // set this to the store for the organisation logged in 
-                   
-                    // eslint-disable-next-line no-const-assign
-                    loginState = {
-                        ...loginState,
-                        orgData
-                    }
-                    
-                    props.login(loginState);
-                })
                 
-                //Get request to load organisation data using /?var=x - querystring
-                //   axios.get(`http://localhost:2876/api/v1/organization/`,{
-                //   params: {
-                //       orgToken: statevalues.organization
-                //     },
-                //   }).then((response)=>{ 
-                //   console.log(response);   
-                // })
+                //alert("success")
+                history.push('/')
 
                 // history.push('/orgProfile:orgName')
           }else if(loginState.role==='Admin'){
@@ -353,7 +331,8 @@ const SignIn = props => {
 //const signInComponent =  withRouter(SignIn);
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (loginObj) => dispatch(login(loginObj))
+  startLogin: (loginObj) => dispatch(startLogin(loginObj)),
+  login:(loginObj) => dispatch(login(loginObj))
 });
 
 export default connect(undefined, mapDispatchToProps)(SignIn);

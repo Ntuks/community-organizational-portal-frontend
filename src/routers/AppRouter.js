@@ -15,21 +15,20 @@ export const history = createHistory();
 
 
 
-const AppRouter = props => {
+const AppRouter = ({auth, login}) => {
 
     useEffect(()=>{
         console.log("mounted")
-
         //Get from local storage the logged in user if exists
-        props.login(
-            {
-            _id: "x",
-            role: "",
-            organization: "x",
-            token: "",
-            orgData: "",
-            })
-    },[props])
+        let user = localStorage.getItem('user')
+        if(user){
+            login( JSON.parse(user) )
+        }
+    },[])
+
+    useEffect(()=>{
+        console.log(auth)
+    },[auth])
 
     return(
     <Router history={history}>
@@ -47,10 +46,15 @@ const AppRouter = props => {
     </Router>
 );
 }
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch,state) => ({
     login: (loginObj) => dispatch(login(loginObj))
   });
   
-export default connect(undefined, mapDispatchToProps)(AppRouter);
+  const mapStateToProps = (state) => ({
+    auth: state.auth
+  });
+export default connect(mapStateToProps, mapDispatchToProps)(AppRouter);
   
 
+
+//edge case -  we currently dont have a way to check if token still valid on page reload

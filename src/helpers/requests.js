@@ -44,5 +44,23 @@ function loginRequest(email,password){
       })
 }
 
+function getOrganisation(orgId){
+                    // Trying to find organisation data to load organisation page.
 
-export {loginRequest}
+                //Get request to load organisation data using /:orgToken 
+                return axios.get(`http://localhost:2876/api/v1/organization/${orgId}`).then((response)=>{ 
+                    const orgData =  response.data;  // set this to the store for the organisation logged in 
+                   return orgData
+                })
+                
+                //Get request to load organisation data using /?var=x - querystring
+                //   axios.get(`http://localhost:2876/api/v1/organization/`,{
+                //   params: {
+                //       orgToken: statevalues.organization
+                //     },
+                //   }).then((response)=>{ 
+                //   console.log(response);   
+                // })
+}
+
+export {loginRequest, getOrganisation}
