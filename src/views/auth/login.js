@@ -213,7 +213,7 @@ const SignIn = props => {
                 //   console.log(response);   
                 // })
 
-              // history.push('/orgProfile:orgName')
+                // history.push('/orgProfile:orgName')
           }else if(loginState.role==='Admin'){
             //If logged in user is an Admin
             history.push('/admin')
