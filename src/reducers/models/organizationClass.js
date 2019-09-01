@@ -2,7 +2,7 @@ import { thisTypeAnnotation } from "@babel/types";
 
 class OrganizationClass {
 
-    constructor( title, date, tagline, location, imagelink, description,areasOfEngagement, pboNpoNum, facebookLink) {
+    constructor( title, date, tagline, location, imagelink, description,areasOfEngagement, pboNpoNum, facebookLink, status) {
         this.title = title;
         this.date = date;
         this.description = description;
@@ -12,6 +12,7 @@ class OrganizationClass {
         this.areasOfEngagement = areasOfEngagement;
         this.pboNpoNum =pboNpoNum;
         this.facebookLink =facebookLink
+        this.status = status
     }
 
     getTitle() {
@@ -30,6 +31,7 @@ class OrganizationClass {
             areasOfEngagement: this.areasOfEngagement, 
             pboNpoNum: this.pboNpoNum,
             facebookLink: this.facebookLink,
+            status: this.status //can be active or inactive
         }
         return newObj
     }

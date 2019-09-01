@@ -7,6 +7,11 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Hidden from '@material-ui/core/Hidden'
+import { withRouter } from "react-router";
+
+
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -22,33 +27,59 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function OrgCard(props) {
+function OrgCard({ title, imagelink, date, description, admin=false, status }) {
     const classes = useStyles();
+
+    const [state, setState] = React.useState({
+        slider: false,
+    });
+    const handleChange = name => event => {
+        console.log(event.target.checked)
+        setState({ ...state, [name]: event.target.checked });
+    };
+
     return (
         <Grid item xs={12}>
-            <CardActionArea component="a" href={`/orgProfile:${props.title}`}>
+            <CardActionArea component="a" href={`/orgProfile:${title}`}>
                 <Card className={classes.card}>
                     <Hidden xsDown>
                         <CardMedia
                             className={classes.cardMedia}
-                            image={ props.imagelink || "https://source.unsplash.com/random"}
+                            image={ imagelink || "https://source.unsplash.com/random"}
                             title="Image title"
                         />
                     </Hidden>
                     <div className={classes.cardDetails}>
                         <CardContent>
                             <Typography component="h2" variant="h5">
-                            {props.title || "Title"}
+                            {title || "Title"}
                         </Typography>
                             <Typography variant="subtitle1" color="textSecondary">
-                            {props.date || "date"}
+                            {date || "date"}
                         </Typography>
                             <Typography variant="subtitle1" paragraph>
-                            {props.description || "description"}
+                            {description || "description"}
                         </Typography>
-                            <Typography variant="subtitle1" color="primary">
-                                Continue reading...
-                        </Typography>
+
+                            { 
+                                admin ? (
+                                <FormControlLabel
+                                    control={
+                                    <Switch
+                                        checked={status == 'active' ? true : false}
+                                        onChange={handleChange('slider')}
+                                        value="slider"
+                                        color="primary"
+                                    />
+                                    }
+                                    label={status == 'active' ? "Account Activated" : "Account Deactivated"}
+                                />
+                            ) : (
+                                <Typography variant="subtitle1" color="primary">
+                                    Continue reading...
+                                </Typography>
+                            ) 
+                            }
                         </CardContent>
                     </div>
                 </Card>
@@ -56,3 +87,5 @@ export default function OrgCard(props) {
         </Grid>
     )
 }
+
+export default withRouter(OrgCard);

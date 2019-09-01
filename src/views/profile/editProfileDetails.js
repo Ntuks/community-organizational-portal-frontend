@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import selectOrganisations from '../../selectors/organisations';
+import { OrganizationsBySearch } from '../../selectors/organisations';
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -120,7 +120,7 @@ const organisation =props.organisation;
 
 const mapStateToProps = (state) => {
     return {
-        organisations: selectOrganisations(state.organisations,state.filters)
+        organisations: OrganizationsBySearch(state.organisations,state.filters)
     };
   };
 

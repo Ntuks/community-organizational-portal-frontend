@@ -68,17 +68,16 @@ export const setOrganisation = (Organisations) => ({
 export const startSetOrganisation = () => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    // return database.ref(`users/${uid}/expenses`).once('value').then((snapshot) => {
-    //   const expenses = [];
-
-    //   snapshot.forEach((childSnapshot) => {
-    //     expenses.push({
-    //       id: childSnapshot.key,
-    //       ...childSnapshot.val()
-    //     });
-    //   });
-
-    //   dispatch(setExpenses(expenses));
-    // });
   };
 };
+
+export const FilterByActive = (status) => ({
+  type: 'SHOW_ACTIVATED',
+  status
+});
+export const startFilterByActive = (status) => {
+  return (dispatch, getState) => {
+    dispatch(FilterByActive(status))
+  };
+};
+

@@ -9,8 +9,8 @@ const SPCA = new Organization(
   "Our mission to prevent cruelty to animals. This is done through education, law enforcement, veterinary care services an Animal Care Centre, Horse Care and Farmyard Unit, and Wildlife Facility.",
   "Animals, Safety, Vetenary",
   "PBO-092345",
-  null
-  
+  null,
+  'inactive'
 )
 
 const CANSA = new Organization(
@@ -23,7 +23,7 @@ const CANSA = new Organization(
   "Cancer, Chemotherapy, Support, Counselling",
   null,
   null,
-  null
+  'inactive'
 )
 
 const OSID = new Organization(
@@ -34,8 +34,9 @@ const OSID = new Organization(
   "/static/images/generic/obsid.png",
   "Develop and sustain a safer, cleaner and smarter public space throughout Observatory.",
   null,
+  null, 
   null,
-  null
+  'active'
 ) 
 
 const WCFID = new Organization(
@@ -47,7 +48,8 @@ const WCFID = new Organization(
   "Develop and advance the lives of people with intellectual disabilities.",
   null,
   null,
-  null
+  null,
+  'active'
 )
 
 
@@ -61,6 +63,7 @@ const organisationsReducerDefaultState = [
 ];
 
 export default (state = organisationsReducerDefaultState, action) => {
+  console.log(state)
   switch (action.type) {
     case 'ADD_ORG':
       return [
@@ -81,6 +84,19 @@ export default (state = organisationsReducerDefaultState, action) => {
         };
       });
     case 'SET_ORG':
+      return action.organisations;
+    case 'ACTIVATE_ORG':
+      return state.map((organisation) => {
+        if (organisation.id === action.id) {
+          return {
+            ...organisation,
+            status: action.status
+          };
+        } else {
+          return organisation;
+        };
+      });
+    case 'DEACTIVATE_ORG':
       return action.organisations;
     default:
       return state;

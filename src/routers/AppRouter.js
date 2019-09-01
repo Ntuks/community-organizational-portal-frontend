@@ -8,6 +8,7 @@ import Profile from '../views/profile'
 import Login from '../views/auth/login'
 import Register from '../views/auth/register'
 import NotFoundPage from '../views/auth/notFound';
+import AdminDashboard from '../views/admin-dashboard'
 
 export const history = createHistory();
 
@@ -20,6 +21,7 @@ const AppRouter = () => (
             <Route path="/myProfile:id" exact component={Profile} />
             <Route path="/sign-in" exact component={Login} />
             <Route path="/sign-up" exact component={Register} />
+            <Route path="/admin" exact component={AdminDashboard} />
             <Route component={NotFoundPage} />
         </Switch>
     </div>

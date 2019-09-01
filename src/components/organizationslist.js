@@ -1,7 +1,7 @@
 import React from 'react';
 import OrganizationCard from './card';
 import { connect } from 'react-redux';
-import selectOrganisations from '../selectors/organisations';
+import { OrganizationsBySearch } from '../selectors/organisations';
 
 export const Organizationslist = (props)=> {
     return (
@@ -30,7 +30,7 @@ export const Organizationslist = (props)=> {
 
 const mapStateToProps = (state) => {
     return {
-        organisations: selectOrganisations(state.organisations,state.filters)
+        organisations: OrganizationsBySearch(state.organisations,state.filters)
     };
   };
 

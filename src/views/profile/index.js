@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import selectOrganisations from '../../selectors/organisations';
+import { OrganizationsBySearch } from '../../selectors/organisations';
 import { Header} from '../../components/layout'
 import ProfileBanner from './ProfileBanner'
 import ProfileAbout from './ProfileAbout'
@@ -58,7 +58,7 @@ export const Profile  = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        organisations: selectOrganisations(state.organisations,state.filters)
+        organisations: OrganizationsBySearch(state.organisations,state.filters)
     };
   };
 
