@@ -1,4 +1,3 @@
- import { thisTypeAnnotation } from "@babel/types";
 
 class OrganizationClass {
 

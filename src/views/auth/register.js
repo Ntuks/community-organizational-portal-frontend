@@ -196,7 +196,7 @@ const SignUp = props => {
 
   return (
     <div className={classes.root}>
-      <Header/>
+      <Header  pageTitle ="SignUp"/>
       <Grid
         className={classes.grid}
         container

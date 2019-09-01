@@ -3,7 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, startLogin } from '../../actions/auth';
 import {history} from '../../routers/AppRouter'
-import axios from 'axios';
 
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -189,7 +188,8 @@ const SignIn = ({startLogin, login}) => {
             //If logged in user is an Org Manager
                 
                 //alert("success")
-                history.push('/')
+                
+                history.push(`/myProfile:${loginState.organization}`)
 
                 // history.push('/orgProfile:orgName')
           }else if(loginState.role==='Admin'){
@@ -218,7 +218,7 @@ const SignIn = ({startLogin, login}) => {
 
   return (
     <div className={classes.root}>
-      <Header/>
+      <Header pageTitle ="signIn"/>
       <Grid
         className={classes.grid}
         container

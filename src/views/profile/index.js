@@ -10,21 +10,27 @@ import ProfileTimeline from './ProfileTimeline'
 export const Profile  = (props) => {
         var isOwner = (props.location.pathname).includes("/myProfile")? true:false
         let urlorganisationName
+        let organisation
         if(isOwner){
+            // this is when the user is the owner and is viewing  their own profile
             const { id } = props.match.params
-            urlorganisationName = id.substring(1)     
+            urlorganisationName = id.substring(1)  
+
+            organisation = props.organisation
         }else{
+            // Any user can open this
             const { orgName } = props.match.params
-            urlorganisationName = orgName.substring(1)       
+            urlorganisationName = orgName.substring(1)     
+            organisation = findOrgDetails()  
         }
 
         function findOrgDetails(){
-            let org =   props.organisations.filter((org)=>{
+            let org =   props.organisationsCardDetails.filter((org)=>{
                   return org.title===urlorganisationName
             })
             return org[0]
         }
-        const organisation = findOrgDetails()
+        
 
         return (
             <div className="content-container-parent">
@@ -58,7 +64,8 @@ export const Profile  = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        organisations: OrganizationsBySearch(state.organisations,state.filters)
+        organisationsCardDetails: OrganizationsBySearch(state.organisations,state.filters),
+        organisation:   state.auth.orgData,
     };
   };
 
