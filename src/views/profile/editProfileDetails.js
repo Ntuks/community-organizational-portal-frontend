@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { connect } from 'react-redux';
 import selectOrganisations from '../../selectors/organisations';
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Autocomplete from 'react-google-autocomplete';
-import zIndex from '@material-ui/core/styles/zIndex';
 import Geocode from "react-geocode";
 import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete'
 
