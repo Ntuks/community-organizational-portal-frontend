@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Hidden from '@material-ui/core/Hidden'
+import {history} from '../routers/AppRouter'
 
 import { startActivateOrg } from '../actions/organisations'
 
@@ -41,9 +42,14 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, id,
         setState({ ...state, [name]: event.target.checked });
     };
 
+    const handleOnClick = event => {
+        event.preventDefault();
+        history.push(`/orgProfile:${title}`)
+    }
+
     return (
         <Grid item xs={12}>
-            <CardActionArea component="a" href={`/orgProfile:${title}`}>
+            <CardActionArea component="a" onClick ={handleOnClick}>
                 <Card className={classes.card}>
                     <Hidden xsDown>
                         <CardMedia

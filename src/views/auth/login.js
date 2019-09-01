@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login, startLogin } from '../../actions/auth';
+import {history} from '../../routers/AppRouter'
+import axios from 'axios';
+
+
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -126,7 +132,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignIn = props => {
-  const { history } = props;
+  //const { history} = props;
 
   const classes = useStyles();
 
@@ -170,9 +176,65 @@ const SignIn = props => {
     }));
   };
 
-  const handleSignIn = event => {
+  const handleLogIn = event => {
     event.preventDefault();
-    history.push('/myProfile:CANSA');
+    startLogin({email:formState.values.email ,password:formState.values.password}).then((loginState)=>{
+      
+      try {
+        if (typeof (loginState.message) !== 'undefined'){
+          // Message sent if there was an issue with credentials
+          alert(loginState.message)
+        }else{
+          //dispatch login to redux
+          
+          if (loginState.role==='Organization Manager'){
+            //If logged in user is an Org Manager
+
+
+                // Trying to find organisation data to load organisation page.
+
+                //Get request to load organisation data using /:orgToken 
+                axios.get(`http://localhost:2876/api/v1/organization/${loginState.organization}`).then((response)=>{ 
+                    const orgData =  response.data;  // set this to the store for the organisation logged in 
+                   
+                    // eslint-disable-next-line no-const-assign
+                    loginState = {
+                        ...loginState,
+                        orgData
+                    }
+                    
+                    props.login(loginState);
+                })
+                
+                //Get request to load organisation data using /?var=x - querystring
+                //   axios.get(`http://localhost:2876/api/v1/organization/`,{
+                //   params: {
+                //       orgToken: statevalues.organization
+                //     },
+                //   }).then((response)=>{ 
+                //   console.log(response);   
+                // })
+
+              // history.push('/orgProfile:orgName')
+          }else if(loginState.role==='Admin'){
+            //If logged in user is an Admin
+            history.push('/admin')
+          }
+          else{
+            //No role is possessed. 
+            alert("No role Found - Please constact system admin")
+            history.push('/')
+          }
+        }
+
+      }catch{
+          // Returned objected not as expected
+          alert("Error-unknown")
+          history.push('/')
+        }
+      
+    })
+    
   };
 
   const hasError = field =>
@@ -216,7 +278,7 @@ const SignIn = props => {
             <div className={classes.contentBody}>
               <form
                 className={classes.form}
-                onSubmit={handleSignIn}
+                onSubmit={handleLogIn}
               >
                 <Typography
                   className={classes.title}
@@ -286,8 +348,14 @@ const SignIn = props => {
   );
 };
 
-SignIn.propTypes = {
-  history: PropTypes.object
-};
+// SignIn.propTypes = {
+//   history: PropTypes.object
+// };
 
-export default withRouter(SignIn);
+//const signInComponent =  withRouter(SignIn);
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (loginObj) => dispatch(login(loginObj))
+});
+
+export default connect(undefined, mapDispatchToProps)(SignIn);
