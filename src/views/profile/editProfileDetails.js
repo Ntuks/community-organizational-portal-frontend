@@ -135,12 +135,6 @@ const organisation =props.organisation;
         
         </TextField> */}
 
-        {/** Purely for styling purposes */}
-        <div style={{
-          'paddingTop': '10px',
-        }} />
-        {/** Purely for styling purposes */}
-
         <MUIPlacesAutocomplete
           textFieldProps={{ 
             value: values.location,
@@ -148,7 +142,8 @@ const organisation =props.organisation;
             onChange: handleChange,
             name: 'location',
             style: {
-              width: "100%"
+              width: "100%",
+              'paddingTop': '10px',
             }
           }}
           onSuggestionSelected={onSuggestionSelected}
