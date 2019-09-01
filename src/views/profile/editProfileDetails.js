@@ -7,14 +7,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Autocomplete from 'react-google-autocomplete';
 import zIndex from '@material-ui/core/styles/zIndex';
-
 import Geocode from "react-geocode";
+import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete'
+
 Geocode.setApiKey(process.env.GOOGLE_MAPS_API);
 Geocode.enableDebug();
-
-
-
-
 
 const useStyles = makeStyles(theme => ({
     postStructure:{
@@ -81,8 +78,23 @@ const organisation =props.organisation;
     }));
   } 
 
+  // Handle suggestions for dropdown of locations
+  // stores lats & longs
+  function onSuggestionSelected(suggestion) {
+    geocodeByPlaceID(suggestion.place_id).then((results) => {
+      const { geometry } = results[0]
+      const coordinates = {
+        lat: geometry.location.lat(),
+        lng: geometry.location.lng(),
+      }
+      console.log(coordinates);
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
   return (
-    <div className="setZIndex">
+    <div>
         <TextField placeholder="Organisation Name"
         className={classes.title}
         name="organisationName"
@@ -123,21 +135,17 @@ const organisation =props.organisation;
         >
         
         </TextField>
-        <div className="ui-autocomplete">
-        <Autocomplete
-            style={{
-              width: '90%'
-            }}
-            onPlaceSelected={(place) => {
-              console.log(place.geometry.location.lat(), place.geometry.location.lng());
-            }}
-            types={['geocode']}
-            componentRestrictions={{country: "za"}}
-        />
-        </div>
-        
 
-        
+        {/** Purely for styling purposes */}
+        <div style={{
+          'padding-top': '10px',
+        }} />
+        {/** Purely for styling purposes */}
+
+        <MUIPlacesAutocomplete
+          onSuggestionSelected={onSuggestionSelected}
+          renderTarget={() => console.log('wowawdas')}
+        />   
 
         <TextField placeholder="pboNpoNumber"
         className={classes.title}
