@@ -178,16 +178,33 @@ const SignIn = props => {
     event.preventDefault();
     startLogin({email:formState.values.email ,password:formState.values.password}).then((loginState)=>{
       
-      if(!('message' in loginState)){
-        props.login(loginState);
-        history.push('/home')
-      }
-      else if (('message' in loginState)){
-        alert(loginState.message)
-      }
-      else{
-        alert(loginState)
-      }
+      try {
+        if (typeof (loginState.message) !== 'undefined'){
+          // Message sent if there was an issue with credentials
+          alert(loginState.message)
+        }else{
+          //dispatch login to redux
+          props.login(loginState);
+          if (loginState.role==='Organization Manager'){
+            //If logged in user is an Org Manager
+
+            // history.push('/orgProfile:orgName')
+          }else if(loginState.role==='Admin'){
+            //If logged in user is an Admin
+            history.push('/admin')
+          }
+          else{
+            //No role is possessed. 
+            alert("No role Found - Please constact system admin")
+            history.push('/')
+          }
+        }
+
+      }catch{
+          // Returned objected not as expected
+          alert("Error-unknown")
+          history.push('/')
+        }
       
     })
     
