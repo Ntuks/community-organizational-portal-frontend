@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux';
 import { Header, Footer } from '../../components/layout'
 import OrganizationStatusFilters from '../../components/adminfilters'
 import OrganizationsList from '../../components/adminOrgList'

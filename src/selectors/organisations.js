@@ -12,21 +12,14 @@ const OrganizationsBySearch = (organisations, {text}) => {
 
 const OrganizationsByActiveState = (organisations, { active, inactive }) => {
   console.log(organisations);
-  if(active == true && inactive == true) {
-    console.log('1')
+  if(active === true && inactive === true) {
     return [...organisations]
   }
-  else if(inactive == true && active == false) {
-    console.log('2')
-    let test = organisations.filter((organisation) => organisation.status != 'active')
-    console.log('test',test)
-    return organisations.filter((organisation) => organisation.status != 'active')
+  else if(inactive === true && active === false) {
+    return organisations.filter((organisation) => organisation.status !== 'active')
   }
-  else if(active == true && inactive == false) {
-    console.log('3')
-    let test = organisations.filter((organisation) => organisation.status != 'inactive')
-    console.log('test',test)
-    return organisations.filter((organisation) => organisation.status != 'inactive')
+  else if(active === true && inactive === false) {
+    return organisations.filter((organisation) => organisation.status !== 'inactive')
   }
   else {
     return []

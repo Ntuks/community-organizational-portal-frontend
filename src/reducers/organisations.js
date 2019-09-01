@@ -10,7 +10,11 @@ const SPCA = new Organization(
   "Animals, Safety, Vetenary",
   "PBO-092345",
   null,
-  'inactive'
+  'inactive',
+  {
+    lat: null,
+    lng: null
+  }
 )
 
 const CANSA = new Organization(
@@ -23,7 +27,11 @@ const CANSA = new Organization(
   "Cancer, Chemotherapy, Support, Counselling",
   null,
   null,
-  'inactive'
+  'inactive',
+  {
+    lat: null,
+    lng: null
+  }
 )
 
 const OSID = new Organization(
@@ -36,7 +44,11 @@ const OSID = new Organization(
   null,
   null, 
   null,
-  'active'
+  'active',
+  {
+    lat: null,
+    lng: null
+  }
 ) 
 
 const WCFID = new Organization(
@@ -49,7 +61,11 @@ const WCFID = new Organization(
   null,
   null,
   null,
-  'active'
+  'active',
+  {
+    lat: null,
+    lng: null
+  }
 )
 
 
@@ -85,7 +101,7 @@ export default (state = organisationsReducerDefaultState, action) => {
       });
     case 'SET_ORG':
       return action.organisations;
-    case 'ACTIVATE_ORG':
+    case 'ACTIVATE_OR_DEACTIVATE_ORG':
       return state.map((organisation) => {
         if (organisation.title === action.id) { //title is only temporary, need to change to ID
           console.log('in here')
@@ -97,8 +113,6 @@ export default (state = organisationsReducerDefaultState, action) => {
           return organisation;
         };
       });
-    case 'DEACTIVATE_ORG':
-      return action.organisations;
     default:
       return state;
   }

@@ -31,14 +31,7 @@ const useStyles = makeStyles(theme => ({
 export const EditProfileDetails=  (props)=>{
   const classes = useStyles();
   
-//    function findOrgDetails(){
-//       let org =   props.organisations.filter((org)=>{
-//             return org.title==='SPCA'
-//       })
-//       return org
-//   }
-//   const organisation = findOrgDetails()
-const organisation =props.organisation;
+  const organisation =props.organisation;
 
   const [values, setValues] = React.useState({
     organisationName: organisation.title||"",
@@ -48,11 +41,11 @@ const organisation =props.organisation;
     location:organisation.location||"",
     pboNpoNumber: organisation.pboNpoNum||"",
     facebookPagelink: organisation.facebookLink||"",
+    coordinates: organisation.coordinates||""
   });
 
   function handleChange(event) {
     event.persist();
-    console.log('123123213213',event)
     setValues(oldValues => ({
       ...oldValues,
       [event.target.name]: event.target.value,
@@ -74,6 +67,7 @@ const organisation =props.organisation;
       setValues(oldValues => ({
         ...oldValues,
         'location': suggestion.description,
+        coordinates
       }));
       console.log(coordinates);
     }).catch((err) => {

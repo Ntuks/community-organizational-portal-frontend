@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, startLogin } from '../../actions/auth';
 import {history} from '../../routers/AppRouter'
 import axios from 'axios';
 
-
-import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
 import {

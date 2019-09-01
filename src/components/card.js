@@ -44,7 +44,8 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, id,
 
     const handleOnClick = event => {
         event.preventDefault();
-        history.push(`/orgProfile:${title}`)
+        if(!admin)
+            history.push(`/orgProfile:${title}`)
     }
 
     return (
@@ -75,13 +76,13 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, id,
                                 <FormControlLabel
                                     control={
                                     <Switch
-                                        checked={status == 'active' ? true : false}
+                                        checked={status === 'active' ? true : false}
                                         onChange={handleChange('slider')}
                                         value="slider"
                                         color="primary"
                                     />
                                     }
-                                    label={status == 'active' ? "Account Activated" : "Account Deactivated"}
+                                    label={status === 'active' ? "Account Activated" : "Account Deactivated"}
                                 />
                             ) : (
                                 <Typography variant="subtitle1" color="primary">

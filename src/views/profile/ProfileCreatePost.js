@@ -4,9 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { TextField, Select, MenuItem, InputLabel, Input } from '@material-ui/core';
-import { mergeClasses } from '@material-ui/styles';
+import { TextField, Select, MenuItem, InputLabel } from '@material-ui/core';
 
 import 'react-dates/initialize';
 import { DateRangePicker} from 'react-dates';
