@@ -79,7 +79,6 @@ const organisationsReducerDefaultState = [
 ];
 
 export default (state = organisationsReducerDefaultState, action) => {
-  console.log(state)
   switch (action.type) {
     case 'ADD_ORG':
       return [
