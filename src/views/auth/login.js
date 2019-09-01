@@ -3,6 +3,8 @@ import { Link as RouterLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, startLogin } from '../../actions/auth';
 import {history} from '../../routers/AppRouter'
+import axios from 'axios';
+
 
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
@@ -184,11 +186,36 @@ const SignIn = props => {
           alert(loginState.message)
         }else{
           //dispatch login to redux
-          props.login(loginState);
+          
           if (loginState.role==='Organization Manager'){
             //If logged in user is an Org Manager
 
-            // history.push('/orgProfile:orgName')
+
+                // Trying to find organisation data to load organisation page.
+
+                //Get request to load organisation data using /:orgToken 
+                axios.get(`http://localhost:2876/api/v1/organization/${loginState.organization}`).then((response)=>{ 
+                    const orgData =  response.data;  // set this to the store for the organisation logged in 
+                   
+                    // eslint-disable-next-line no-const-assign
+                    loginState = {
+                        ...loginState,
+                        orgData
+                    }
+                    
+                    props.login(loginState);
+                })
+                
+                //Get request to load organisation data using /?var=x - querystring
+                //   axios.get(`http://localhost:2876/api/v1/organization/`,{
+                //   params: {
+                //       orgToken: statevalues.organization
+                //     },
+                //   }).then((response)=>{ 
+                //   console.log(response);   
+                // })
+
+              // history.push('/orgProfile:orgName')
           }else if(loginState.role==='Admin'){
             //If logged in user is an Admin
             history.push('/admin')

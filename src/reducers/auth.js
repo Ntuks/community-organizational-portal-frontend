@@ -6,7 +6,8 @@ export default (state = {}, action) => {
             userid: action._id,
             role: action.role,
             organizationid: action.organization,
-            token: action.token
+            token: action.token,
+            orgData: action.orgData,
         };
       case 'LOGOUT':
         return {};
