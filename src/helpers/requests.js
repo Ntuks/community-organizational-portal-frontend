@@ -73,4 +73,22 @@ function getOrganisation(orgId){
                 // })
 }
 
-export {loginRequest, getOrganisation}
+function registerRequest({name, surname,email,password}){
+    return axios.post(
+        'http://localhost:2876/register', 
+        {   
+            name,
+            surname,
+            email,
+            password
+        }
+        )
+      .then(function (response, error) {
+        if(error){
+            alert(error)
+          }else{
+            return response
+          }
+      })
+}
+export {loginRequest, getOrganisation, registerRequest}
