@@ -1,4 +1,4 @@
-import React,{useEffect}  from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
@@ -54,6 +54,7 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage />, document.getElementById('root'));
 
+         //Get from local storage the logged in user if exists
         let user = localStorage.getItem('user')
         if(user){
             store.dispatch(login( JSON.parse(user) ))
@@ -84,4 +85,4 @@ ReactDOM.render(<LoadingPage />, document.getElementById('root'));
 
         //export default connect(mapStateToProps, mapDispatchToProps)(AppWithRoutes);
 
-        //Get from local storage the logged in user if exists
+       

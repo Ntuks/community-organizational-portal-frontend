@@ -57,7 +57,7 @@ function Header(props) {
           : null
           }
           {
-            props.pageTitle.includes('orgProfile')||props.pageTitle.includes('admin') ?
+            props.pageTitle.includes('myProfile')||props.pageTitle.includes('admin') ?
             <Link to = "/" className={classes.link} onClick = {props.startLogout}>
               Log Out 
             </Link>

@@ -9,6 +9,8 @@ import Register from '../views/auth/register'
 import NotFoundPage from '../views/auth/notFound';
 import AdminDashboard from '../views/admin-dashboard'
 
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 export const history = createHistory();
 
@@ -22,10 +24,10 @@ export const history = createHistory();
         <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/orgProfile:orgName" exact component={Profile} />
-            <Route path="/myProfile:id" exact component={Profile} />
+            <PrivateRoute path="/myProfile:id" exact component={Profile} />
             <Route path="/sign-in" exact component={Login} />
             <Route path="/sign-up" exact component={Register} />
-            <Route path="/admin" exact component={AdminDashboard} />
+            <PrivateRoute path="/admin" exact component={AdminDashboard} />
             <Route component={NotFoundPage} />
         </Switch>
     </div>

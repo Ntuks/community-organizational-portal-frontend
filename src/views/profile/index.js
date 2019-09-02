@@ -35,7 +35,7 @@ export const Profile  = (props) => {
         return (
             <div className="content-container-parent">
                 <div className="content-container-header">
-                    <Header pageTitle ="orgProfile" />
+                    <Header pageTitle ={props.location.pathname} />
                 </div>
                 
                 <div className="content-container">
