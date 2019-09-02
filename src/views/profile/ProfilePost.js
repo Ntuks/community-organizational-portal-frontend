@@ -65,7 +65,7 @@ export default function ProfilePost() {
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/generic/spcaPost.jpeg"
+        image="/static/images/generic/newPost.gif"
         title="Paella dish"
       />
       <CardContent>

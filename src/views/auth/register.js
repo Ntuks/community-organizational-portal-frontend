@@ -16,6 +16,8 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Header, Footer } from '../../components/layout'
 
+import {registerRequest} from '../../helpers/requests'
+
 const schema = {
   firstName: {
     presence: { allowEmpty: false, message: 'is required' },
@@ -188,7 +190,23 @@ const SignUp = props => {
 
   const handleSignUp = event => {
     event.preventDefault();
-    history.push('/');
+
+    registerRequest(
+      { name: formState.values.firstName,
+        surname:formState.values.lastName,
+        email: formState.values.email,
+        password: formState.values.password
+      }
+    ).then((response)=>{
+        if(response.data.message === 'Signup Successful!'){
+          alert("Signup Successful. Please log in")
+          history.push('/');
+        }else{
+          alert(response.data.message)
+        }
+    })
+    
+    
   };
 
   const hasError = field =>

@@ -49,7 +49,7 @@ export default function MediaCard(props) {
           title="ProfileBanner"  
         >
             <Grid>
-                <Avatar alt="IMG" src={`${props.organisation.imagelink}`} className={classes.bigAvatar} />
+                <Avatar alt="IMG" src={`${props.organisation.imagelink||"/static/images/generic/register.jpg"}`} className={classes.bigAvatar} />
             </Grid>
         </CardMedia>
         <CardContent className={classes.cardContent}>
