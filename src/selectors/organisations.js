@@ -42,15 +42,16 @@ const OrganizationsBySearch = (organisations, {text}) => {
 
       }else if(master.length === 0){
         // if master is empty, then assign all word matches
-        console.log(wordMatches)
+        //console.log(wordMatches)
         master = master.concat(wordMatches)
       }
 
     })
 
-    console.log(master)
+    //console.log(master)
   })
-  
+  //checking for exact match and placing at top
+
   return master;
 };
 

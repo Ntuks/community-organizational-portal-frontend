@@ -10,7 +10,7 @@ import NotFoundPage from '../views/auth/notFound';
 import AdminDashboard from '../views/admin-dashboard'
 
 import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
+import AdminRoute from './AdminRoute';
 
 export const history = createHistory();
 
@@ -27,7 +27,7 @@ export const history = createHistory();
             <PrivateRoute path="/myProfile:id" exact component={Profile} />
             <Route path="/sign-in" exact component={Login} />
             <Route path="/sign-up" exact component={Register} />
-            <PrivateRoute path="/admin" exact component={AdminDashboard} />
+            <AdminRoute path="/admin" exact component={AdminDashboard} />
             <Route component={NotFoundPage} />
         </Switch>
     </div>

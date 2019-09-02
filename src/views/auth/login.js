@@ -187,8 +187,7 @@ const SignIn = ({startLogin, login}) => {
           if (loginState.role==='Organization Manager'){
             //If logged in user is an Org Manager
                 
-                //alert("success")
-                
+                //alert("success")      
                 history.push(`/myProfile:${loginState.organization}`)
 
                 // history.push('/orgProfile:orgName')

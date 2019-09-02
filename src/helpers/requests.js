@@ -20,6 +20,7 @@ function loginRequest(email,password){
         //config settings object
         )
       .then(function (response) {
+          
           if (response.data.orgManager){
               let statevalues  = {
                   ...response.data.orgManager,
@@ -30,8 +31,17 @@ function loginRequest(email,password){
                 
                 // sets cookie in header for all 
                 axios.defaults.headers.common['set-cookie'] = response.data.token; 
+                //console.log(statevalues)
                 return statevalues;
-          }else if (response.data.message){
+          }else if(response.data.role){
+                let statevalues  = {
+                    ...response.data,
+                    token: response.data.token,
+                };
+                //console.log(statevalues)
+                return statevalues;
+          }
+          else if (response.data.message){
               return {message: response.data.message}
           }
           else{
