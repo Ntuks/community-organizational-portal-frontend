@@ -120,7 +120,7 @@ export default function SimpleCard(props) {
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Oganisation Profile Details </h2>
             <div id="transition-modal-description">
-              <EditProfileDetails organisation={props.organisation}/>
+              <EditProfileDetails organisation={props.organisation} handleClose={handleClose}/>
             </div>
           </div>
         </Fade>

@@ -17,9 +17,7 @@ class Map extends Component {
 
   return !this.props.isGeolocationAvailable ? (
     <div>Your browser does not support Geolocation</div>
-) : !this.props.isGeolocationEnabled ? (
-    <div>Geolocation is not enabled</div>
-) : this.props.coords ? (
+  ) : this.props.coords ? (
     <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_API }}

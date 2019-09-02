@@ -3,26 +3,9 @@ export const addOrganisation = (organisation) => ({
   type: 'ADD_EXPENSE',
   organisation
 });
-
-export const startAddOrganisation = (organisationData = {}) => {
+export const startAddOrganisation = (organisation) => {
   return (dispatch, getState) => {
-    // const uid = getState().auth.uid;
-    // const {
-    //   description = '',
-    //   note = '',
-    //   amount = 0,
-    //   createdAt = 0
-    // } = organisationData;
-    // const expense = { description, note, amount, createdAt };
-
-    //push to DB 
-
-    // return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
-    //   dispatch(addExpense({
-    //     id: ref.key,
-    //     ...expense
-    //   }));
-    //});
+    dispatch(addOrganisation(organisation))
   };
 };
 

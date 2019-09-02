@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { OrganizationsBySearch } from '../../selectors/organisations';
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 import Geocode from "react-geocode";
-import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete'
+import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete';
+import { startAddOrganisation } from '../../actions/organisations';
 
-Geocode.setApiKey(process.env.GOOGLE_MAPS_API);
+Geocode.setApiKey('AIzaSyArIRJ8PDlCmFfTslAi7hT3PTJhjB1hJoY');
 Geocode.enableDebug();
 
 const useStyles = makeStyles(theme => ({
@@ -17,14 +19,19 @@ const useStyles = makeStyles(theme => ({
         "justify-content": "space-between",
         paddingBottom: 5,
       },
-      postType:{
+      buttonDiv:{
         display: 'flex',
         flexWrap: 'wrap',
+        'justifyContent': 'space-around'
       },
       title: {
         fontSize: 14,
         paddingTop: 10,
         width: "100%",
+      },
+      button: {
+        marginTop: theme.spacing(2),
+        display: 'flex',
       },
 }));
 
@@ -82,7 +89,10 @@ export const EditProfileDetails=  (props)=>{
     }
   }
 
-  
+  function handleUpdateProfile() {
+    props.handleClose();
+    props.startAddOrganisation(values);
+  }
 
   return (
     <div>
@@ -117,15 +127,6 @@ export const EditProfileDetails=  (props)=>{
         onChange={handleChange}
         >
         </TextField>
-{/* 
-        <TextField placeholder="location"
-        className={classes.title}
-        name="location"
-        value={values.location}
-        onChange={handleChange}
-        >
-        
-        </TextField> */}
 
         <MUIPlacesAutocomplete
           textFieldProps={{ 
@@ -158,17 +159,19 @@ export const EditProfileDetails=  (props)=>{
         onChange={handleChange}
         >
         </TextField>
-
-
+          <div className={classes.buttonDiv}>
+          <Button variant="contained" color="primary" className={classes.button} onClick={handleUpdateProfile}>
+            Update Profile
+          </Button>
+          </div>
+        
     </div>
     
   );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        organisations: OrganizationsBySearch(state.organisations,state.filters)
-    };
-  };
+const mapDispatchToProps = (dispatch) => ({
+  startAddOrganisation: (organisation) => dispatch(startAddOrganisation(organisation))
+})
 
-export default connect(mapStateToProps)(EditProfileDetails);
+export default connect(null, mapDispatchToProps)(EditProfileDetails);
