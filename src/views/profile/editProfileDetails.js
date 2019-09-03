@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 export const EditProfileDetails=  (props)=>{
   const classes = useStyles();
   
-  const organisation =props.organisation;
+  const organisation = props.organisation;
 
   const [values, setValues] = React.useState({
     organisationName: organisation.title||"",

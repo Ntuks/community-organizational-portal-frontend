@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -51,17 +53,21 @@ const useStyles = makeStyles(theme =>({
 })
 );
 
-export default function SimpleCard(props) {
+function SimpleCard(props) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    console.log('test')
+    console.log(props.organisation)
+  }, []);
 
   function handleEditProfile(){
     setOpen(true);
   }
   
-
-  const handleClose = () => {
+  function handleClose() {
     setOpen(false);
   };
 
@@ -128,3 +134,9 @@ export default function SimpleCard(props) {
     </Card>
   );
 }
+
+const mapStateToProps = (state) => ({
+  organisation: state.auth.orgData
+})
+
+export default connect(mapStateToProps)(SimpleCard);
