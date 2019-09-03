@@ -46,9 +46,9 @@ export const EditProfileDetails = (props)=>{
     description:organisation.description||"",
     areasOfEngagement: organisation.areasOfEngagement||"",
     location:organisation.location||"",
-    pboNpoNumber: organisation.pboNpoNum||"",
+    pboNpoNumber: organisation.pboNpoNumber||"",
     facebookPagelink: organisation.facebookLink||"",
-    // coordinates: organisation.coordinates||""
+    coordinates: organisation.coordinates||""
   });
 
   function handleChange(event) {

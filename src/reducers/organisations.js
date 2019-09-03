@@ -88,11 +88,11 @@ const WCFID = new Organization(
 // OrganisationDetails Reducer
 
 const organisationsReducerDefaultState = [
-  SPCA.getObject(),
-  CANSA.getObject(),
-  OSID.getObject(),
-  WCFID.getObject(),
-  CANSA2.getObject(),
+  // SPCA.getObject(),
+  // CANSA.getObject(),
+  // OSID.getObject(),
+  // WCFID.getObject(),
+  // CANSA2.getObject(),
 ];
 
 export default (state = organisationsReducerDefaultState, action) => {
@@ -104,17 +104,6 @@ export default (state = organisationsReducerDefaultState, action) => {
       ];
     case 'REMOVE_ORG':
       return state.filter(({ id }) => id !== action.id);
-    case 'EDIT_ORG':
-      return state.map((organisation) => {
-        if (organisation.id === action.id) {
-          return {
-            ...organisation,
-            ...action.updates
-          };
-        } else {
-          return organisation;
-        };
-      });
     case 'SET_ORG':
       return action.organisations;
     case 'ACTIVATE_OR_DEACTIVATE_ORG':

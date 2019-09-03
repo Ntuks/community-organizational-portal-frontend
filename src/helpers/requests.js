@@ -110,7 +110,6 @@ function updateOrganisation(orgId, organisation){
         })
 }
 
-export {loginRequest, getOrganisation, registerRequest, updateOrganisation}
 function getProjects(){
     return axios.get(`http://localhost:2876/api/v1/projects`).then((response)=>{ 
         const postData =  response.data;  // set this to the store for the organisation logged in 
@@ -121,6 +120,13 @@ function getCampaigns(){
     return axios.get(`http://localhost:2876/api/v1/campaigns`).then((response)=>{ 
         const postData =  response.data;  // set this to the store for the organisation logged in 
        return postData
+    })
+}
+function getAllOrganisations(){
+    return axios.get(`http://localhost:2876/api/v1/organizations`).then((response)=>{ 
+        const orgData =  response.data;  // set this to the store for the organisation logged in 
+        console.log('successfully receiving data...',orgData);
+       return orgData
     })
 }
 
@@ -159,5 +165,5 @@ function createPost(postObj,postType){
 
 }
 
-export {loginRequest, getOrganisation, registerRequest,getProjects,getCampaigns ,createPost}
+export {loginRequest, getOrganisation, registerRequest,getProjects,getCampaigns ,createPost, updateOrganisation, getAllOrganisations}
 

@@ -72,7 +72,6 @@ export const startSetProjects = (projects) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
     getProjects().then((response)=>{
-
       dispatch(setProjects(response))
     })
   };

@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import GoogleMapReact from 'google-map-react';
 import Marker from './map_marker';
 import { geolocated } from "react-geolocated";
 
 
 class Map extends Component {
+
+  componentDidUpdate() {
+    console.log('munted');
+    console.log(this.props.organisations);
+  }
   static defaultProps = {
     center: {
       lat: 30.55,
@@ -27,21 +34,24 @@ class Map extends Component {
           }}
           defaultZoom={this.props.zoom}
         >
+          
+            {/* this.props.organisations.map((org) => {
+              return (
+                <Marker
+                  lat={org.coordinates.lat}
+                  lng={org.coordinates.lng}
+                  text={org.title}
+                />
+              )
+            }) */}
+          
+          
           <Marker
-            lat={-33.93812}
-            lng={18.468619999999987}
+            lat={-33.9248685}
+            lng={18.424055299999964}
             text="TEST"
           />
-          <Marker
-            lat={65.955413}
-            lng={35.337844}
-            text=""
-          />
-          <Marker
-            lat={20.955413}
-            lng={15.337844}
-            text="CANSA"
-          />
+  
         </GoogleMapReact>
       </div>
   ) : (
@@ -50,9 +60,17 @@ class Map extends Component {
   }
 }
 
-export default geolocated({
-  positionOptions: {
-      enableHighAccuracy: false,
-  },
-  userDecisionTimeout: 5000,
-})(Map);
+const mapStateToProps = (state) => ({
+  organisations: state.organisations
+});
+
+const enhance = compose(
+  geolocated({
+    positionOptions: {
+        enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+  }),
+  connect(mapStateToProps),
+)
+export default enhance(Map);

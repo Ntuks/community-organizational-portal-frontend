@@ -1,4 +1,4 @@
-import { updateOrganisation } from '../helpers/requests';
+import { updateOrganisation, getAllOrganisations } from '../helpers/requests';
 
 // REMOVE_EXPENSE
 export const removeOrganisation = ({ id } = {}) => ({
@@ -33,14 +33,19 @@ export const startEditOrganisation = (id, updates) => {
 };
 
 // SET_EXPENSES
-export const setOrganisation = (Organisations) => ({
-  type: 'SET_Organisation',
-  Organisations
+export const setOrganisation = (organisations) => ({
+  type: 'SET_ORG',
+  organisations
 });
 
 export const startSetOrganisation = () => {
   return (dispatch, getState) => {
-    // const uid = getState().auth.uid;
+    getAllOrganisations()
+      .then((orgs) => {
+        console.log('orgs', orgs)
+        dispatch(setOrganisation(orgs))
+      })
+      .catch(error => console.log('The following error occured:', error))
   };
 };
 
