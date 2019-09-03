@@ -1,5 +1,5 @@
 import {getProjects, createPost} from '../helpers/requests'
-
+import {startLogout } from './auth'
 export const addProject = (project) => ({
   type: 'ADD_PROJECT',
   project: project
@@ -72,8 +72,14 @@ export const startSetProjects = (projects) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
     getProjects().then((response)=>{
-
-      dispatch(setProjects(response))
+      if(typeof (response.message) !== 'undefined'){
+          //user inactive
+          alert("Account inactive, contact admin")
+          dispatch(startLogout())
+      }else{
+        dispatch(setProjects(response))
+      }
+      
     })
   };
 };
