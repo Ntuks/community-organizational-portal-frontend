@@ -91,26 +91,53 @@ function registerRequest({name, surname,email,password}){
           }
       })
 }
-function getPosts(){
+function getProjects(){
     return axios.get(`http://localhost:2876/api/v1/projects`).then((response)=>{ 
         const postData =  response.data;  // set this to the store for the organisation logged in 
        return postData
     })
 }
-
-function createPost(postObj){
-    return axios.post(
-        'http://localhost:2876/api/v1/projects', 
-        postObj
-        )
-      .then(function (response, error) {
-        if(error){
-            alert(error)
-          }else{
-            return response
-          }
-      })
+function getCampaigns(){
+    return axios.get(`http://localhost:2876/api/v1/campaigns`).then((response)=>{ 
+        const postData =  response.data;  // set this to the store for the organisation logged in 
+       return postData
+    })
 }
 
-export {loginRequest, getOrganisation, registerRequest,getPosts, createPost}
+
+function createPost(postObj,postType){
+    switch(postType){
+        case "Project":
+            return axios.post(
+                'http://localhost:2876/api/v1/projects', 
+                postObj
+                )
+            .then(function (response, error) {
+                if(error){
+                    alert(error)
+                }else{
+                    return response
+                }
+            })
+            break ;
+        case "Campaign": 
+            return axios.post(
+                'http://localhost:2876/api/v1/campaigns', 
+                postObj
+                )
+            .then(function (response, error) {
+                if(error){
+                    alert(error)
+                }else{
+                    return response
+                }
+            })
+            break ;
+
+        //no default
+    }
+
+}
+
+export {loginRequest, getOrganisation, registerRequest,getProjects, createPost}
 

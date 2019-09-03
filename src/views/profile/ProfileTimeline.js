@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import ProfileCreatePost from './ProfileCreatePost' 
 import ProfilePost from './ProfilePost';
 
-import {startSetOrganisation} from '../../actions/project';
+import {startSetProjects} from '../../actions/project';
 
 
 export function ProfileTimeline(props) {
@@ -29,7 +29,7 @@ export function ProfileTimeline(props) {
   );
 }
 const mapDispatchToProps = (dispatch) => ({
-  startSetOrganisation:  dispatch(startSetOrganisation())
+  startSetProjects:  dispatch(startSetProjects())
 });
 
 const mapStateToProps = (state) => {

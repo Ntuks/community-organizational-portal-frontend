@@ -147,18 +147,34 @@ export const ProfileCreatePost = ({startAddProject, ...rest}) => {
   }
   function handlePostSubmit(){
     
+    let end = "indefinite"
+    if(values.endDate){
+      end = values.endDate.toString()
+    }
+
     if(values.postType==="Project"){
-      let end = "indefinite"
-      if(values.endDate){end = values.endDate.toString()}
+
+
+          startAddProject({
+            title: values.postTitle,
+            description: values.postDescription,
+            duration: values.startDate.toString()+ " - "+ end,
+            poster: "",
+          },"Project") 
+    }
+    if(values.postType==="Campaign"){
 
       startAddProject({
         title: values.postTitle,
         description: values.postDescription,
         duration: values.startDate.toString()+ " - "+ end,
+        "location": values.location,
+        time:"",
         poster: "",
-      })
-      
+      },"Project") 
+
     }
+
   }
   return (
     <Card className={classes.card}>

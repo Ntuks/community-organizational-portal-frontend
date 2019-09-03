@@ -1,11 +1,11 @@
-import {getPosts, createPost} from '../helpers/requests'
+import {getProjects, createPost} from '../helpers/requests'
 
 export const addProject = (project) => ({
   type: 'ADD_PROJECT',
   project: project
 });
 
-export const startAddProject = (projectData) => {
+export const startAddProject = (projectData,postType) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
     const {
@@ -19,7 +19,7 @@ export const startAddProject = (projectData) => {
     //push to DB 
     console.log(project);
 
-    createPost(project).then((response) =>{
+    createPost(project,postType).then((response) =>{
       if(typeof (response.data.message) !== 'undefined'){
         alert(response.data.message)
       }else{
@@ -68,10 +68,10 @@ export const setProjects = (project) => ({
   project: project
 });
 
-export const startSetOrganisation = (projects) => {
+export const startSetProjects = (projects) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
-    getPosts().then((response)=>{
+    getProjects().then((response)=>{
 
       dispatch(setProjects(response))
     })
@@ -88,4 +88,5 @@ export const startActivateOrg = (id, status) => {
     dispatch(activateOrg(id, status))
   };
 };
+
 
