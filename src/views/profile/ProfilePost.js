@@ -52,7 +52,7 @@ export default function ProfilePost() {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            *
           </Avatar>
         }
         action={
