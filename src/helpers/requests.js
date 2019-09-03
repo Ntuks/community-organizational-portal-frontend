@@ -60,7 +60,7 @@ function getOrganisation(orgId){
                 //Get request to load organisation data using /:orgToken 
                 return axios.get(`http://localhost:2876/api/v1/organization/${orgId}`).then((response)=>{ 
                     const orgData =  response.data;  // set this to the store for the organisation logged in 
-                   return orgData
+                    return orgData
                 })
                 
                 //Get request to load organisation data using /?var=x - querystring
@@ -91,4 +91,23 @@ function registerRequest({name, surname,email,password}){
           }
       })
 }
-export {loginRequest, getOrganisation, registerRequest}
+
+function updateOrganisation(orgId, organisation){
+    console.log('fockol', orgId, organisation)
+    // Trying to find organisation data to load organisation page.
+    //Get request to load organisation data using /:orgToken 
+    const objToPut = {
+        ...organisation
+    }
+    console.log(objToPut);
+    return axios.put(`http://localhost:2876/api/v1/organization/${orgId}`, objToPut)
+        .then((response)=> { 
+            console.log('focko2l', response.data);
+            const orgData =  response.data;  // set this to the store for the organisation logged in 
+            return orgData
+        }).catch((error) =>{
+            console.log('bjhbhjkbjk',error)
+        })
+}
+
+export {loginRequest, getOrganisation, registerRequest, updateOrganisation}

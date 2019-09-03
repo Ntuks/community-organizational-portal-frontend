@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 
 import Geocode from "react-geocode";
 import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete';
-import { startAddOrganisation } from '../../actions/organisations';
+import { startAddOrganisation } from '../../actions/auth';
 
 Geocode.setApiKey('AIzaSyArIRJ8PDlCmFfTslAi7hT3PTJhjB1hJoY');
 Geocode.enableDebug();
@@ -35,20 +35,20 @@ const useStyles = makeStyles(theme => ({
       },
 }));
 
-export const EditProfileDetails=  (props)=>{
+export const EditProfileDetails = (props)=>{
   const classes = useStyles();
   
   const organisation = props.organisation;
 
   const [values, setValues] = React.useState({
-    organisationName: organisation.title||"",
+    title: organisation.title||"",
     tagline: organisation.tagline||"",
     description:organisation.description||"",
     areasOfEngagement: organisation.areasOfEngagement||"",
     location:organisation.location||"",
     pboNpoNumber: organisation.pboNpoNum||"",
     facebookPagelink: organisation.facebookLink||"",
-    coordinates: organisation.coordinates||""
+    // coordinates: organisation.coordinates||""
   });
 
   function handleChange(event) {
@@ -71,11 +71,11 @@ export const EditProfileDetails=  (props)=>{
       }
 
       //need to set state based on whats selected from dropdown
-      setValues(oldValues => ({
-        ...oldValues,
-        'location': suggestion.description,
-        coordinates
-      }));
+      // setValues(oldValues => ({
+      //   ...oldValues,
+      //   'location': suggestion.description,
+      //   coordinates
+      // }));
       console.log(coordinates);
     }).catch((err) => {
       console.log(err)
@@ -91,15 +91,16 @@ export const EditProfileDetails=  (props)=>{
 
   function handleUpdateProfile() {
     props.handleClose();
-    props.startAddOrganisation(values);
+    console.log('testing')
+    props.startAddOrganisation(props.organisation._id, values);
   }
 
   return (
     <div>
         <TextField placeholder="Organisation Name"
         className={classes.title}
-        name="organisationName"
-        value={values.organisationName}
+        name="title"
+        value={values.title}
         onChange={handleChange}
         >
         </TextField>
@@ -171,7 +172,7 @@ export const EditProfileDetails=  (props)=>{
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddOrganisation: (organisation) => dispatch(startAddOrganisation(organisation))
+  startAddOrganisation: (id, organisation) => dispatch(startAddOrganisation(id, organisation))
 })
 
 export default connect(null, mapDispatchToProps)(EditProfileDetails);

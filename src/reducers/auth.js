@@ -1,4 +1,12 @@
-export default (state = {}, action) => {
+const defaultAuthState = {
+  userid: '',
+  role: '',
+  organizationid: '',
+  token: '',
+  orgData: '',
+}
+
+export default (state = defaultAuthState, action) => {
     switch (action.type) {
       case 'LOGIN':
         return {
@@ -11,6 +19,11 @@ export default (state = {}, action) => {
         };
       case 'LOGOUT':
         return {};
+      case 'EDIT_AUTH_ORG':
+        return {
+          ...state,
+          orgData: action.organisation
+        }
       default:
         return state;
     }
