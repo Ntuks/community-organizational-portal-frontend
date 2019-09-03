@@ -48,10 +48,10 @@ const OrganizationsBySearch = (organisations, {text}) => {
 
     })
 
-    //console.log(master)
+    
   })
   //checking for exact match and placing at top
-
+  //incomplete
   return master;
 };
 

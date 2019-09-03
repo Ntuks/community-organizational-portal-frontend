@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -16,6 +18,8 @@ import moment from 'moment';
 
 import Geocode from "react-geocode";
 import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete'
+
+import {startAddProject} from '../../actions/project';
 
 Geocode.setApiKey(process.env.GOOGLE_MAPS_API);
 Geocode.enableDebug();
@@ -72,7 +76,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleCard() {
+export const ProfileCreatePost = ({startAddProject}) => {
   const classes = useStyles();
   
   const [values, setValues] = React.useState({
@@ -141,7 +145,21 @@ export default function SimpleCard() {
       componentRestrictions: {country: "za"},
     }
   }
-
+  function handlePostSubmit(){
+    
+    if(values.postType==="Project"){
+     
+      startAddProject({
+      title: values.postTitle,
+      //time: values.postTime ,
+      location: values.location,
+      description: values.description,
+      startDate: values.startDate.toString(),
+      endDate: values.endDate?values.endDate.toString():"",
+      })
+      
+    }
+  }
   return (
     <Card className={classes.card}>
       <CardContent >
@@ -282,8 +300,15 @@ export default function SimpleCard() {
 
       <CardActions>
         <Button size="small">Upload Image</Button>
-        <Button size="small">Submit</Button>
+        <Button size="small" onClick = {handlePostSubmit}>Submit</Button>
       </CardActions>
     </Card>
   );
 }
+
+
+const mapDispatchToProps = (dispatch) => ({
+  startAddProject: (project) => dispatch(startAddProject(project))
+});
+
+export default connect(undefined, mapDispatchToProps)(ProfileCreatePost);
