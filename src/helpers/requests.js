@@ -139,5 +139,5 @@ function createPost(postObj,postType){
 
 }
 
-export {loginRequest, getOrganisation, registerRequest,getProjects, createPost}
+export {loginRequest, getOrganisation, registerRequest,getProjects,getCampaigns ,createPost}
 

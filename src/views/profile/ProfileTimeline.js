@@ -23,7 +23,7 @@ export function ProfileTimeline(props) {
         
 
         }
-        {props.startSetOrganisation}
+        {props.startSetProjects}
         </div>
         
   );
