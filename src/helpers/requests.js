@@ -91,4 +91,26 @@ function registerRequest({name, surname,email,password}){
           }
       })
 }
-export {loginRequest, getOrganisation, registerRequest}
+function getPosts(){
+    return axios.get(`http://localhost:2876/api/v1/projects`).then((response)=>{ 
+        const postData =  response.data;  // set this to the store for the organisation logged in 
+       return postData
+    })
+}
+
+function createPost(postObj){
+    return axios.post(
+        'http://localhost:2876/api/v1/projects', 
+        postObj
+        )
+      .then(function (response, error) {
+        if(error){
+            alert(error)
+          }else{
+            return response
+          }
+      })
+}
+
+export {loginRequest, getOrganisation, registerRequest,getPosts, createPost}
+

@@ -1,3 +1,4 @@
+import {getPosts, createPost} from '../helpers/requests'
 
 export const addProject = (project) => ({
   type: 'ADD_PROJECT',
@@ -9,18 +10,23 @@ export const startAddProject = (projectData) => {
     // const uid = getState().auth.uid;
     const {
       title = '',
-      location ='',
       description = '',
-      startDate = '',
-      endDate = '',
+      duration = '',
+      poster = '',
     } = projectData;
-    const project = { title,location , description, startDate, endDate };
-    console.log("dispatching:", project)
+    const project = { title, description, duration, poster };
+    
     //push to DB 
+    console.log(project);
 
-    // return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
-       dispatch(addProject(project));
-    //});
+    createPost(project).then((response) =>{
+      if(typeof (response.data.message) !== 'undefined'){
+        alert(response.data.message)
+      }else{
+        dispatch(addProject(response.data));
+      }
+    });
+
   };
 };
 
@@ -36,6 +42,7 @@ export const startRemoveOrganisation = ({ id } = {}) => {
     // return database.ref(`users/${uid}/expenses/${id}`).remove().then(() => {
     //   dispatch(removeOrganisation({ id }));
     // });
+
   };
 };
 
@@ -55,15 +62,19 @@ export const startEditOrganisation = (id, updates) => {
   };
 };
 
-// SET_EXPENSES
-export const setOrganisation = (Organisations) => ({
-  type: 'SET_Organisation',
-  Organisations
+// SET_PROJECTS
+export const setProjects = (project) => ({
+  type: 'SET_PROJECT',
+  project: project
 });
 
-export const startSetOrganisation = () => {
+export const startSetOrganisation = (projects) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
+    getPosts().then((response)=>{
+
+      dispatch(setProjects(response))
+    })
   };
 };
 

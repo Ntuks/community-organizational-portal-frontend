@@ -76,7 +76,7 @@ const useStyles = makeStyles({
   }
 });
 
-export const ProfileCreatePost = ({startAddProject}) => {
+export const ProfileCreatePost = ({startAddProject, ...rest}) => {
   const classes = useStyles();
   
   const [values, setValues] = React.useState({
@@ -148,14 +148,14 @@ export const ProfileCreatePost = ({startAddProject}) => {
   function handlePostSubmit(){
     
     if(values.postType==="Project"){
-     
+      let end = "indefinite"
+      if(values.endDate){end = values.endDate.toString()}
+
       startAddProject({
-      title: values.postTitle,
-      //time: values.postTime ,
-      location: values.location,
-      description: values.description,
-      startDate: values.startDate.toString(),
-      endDate: values.endDate?values.endDate.toString():"",
+        title: values.postTitle,
+        description: values.postDescription,
+        duration: values.startDate.toString()+ " - "+ end,
+        poster: "",
       })
       
     }
@@ -271,7 +271,8 @@ export const ProfileCreatePost = ({startAddProject}) => {
       }
       </div>
       <div className= {classes.MUI}>
-      <MUIPlacesAutocomplete
+      {values.postType!=="Event"? null:(
+        <MUIPlacesAutocomplete
         textFieldProps={{ 
           value: values.location,
           placeholder: 'location',
@@ -286,6 +287,8 @@ export const ProfileCreatePost = ({startAddProject}) => {
         renderTarget={() => (<div />)}
         createAutocompleteRequest={createAutocompleteRequest}
       />
+      )}
+
       </div>
       
       <br></br>
