@@ -141,6 +141,7 @@ function createPost(postObj,postType){
             break ;
 
         case "Event": 
+            //comment 
             return axios.post(
                 'http://localhost:2876/api/v1/events', 
                 postObj
@@ -154,7 +155,7 @@ function createPost(postObj,postType){
             })
             break ;
 
-        //comment 
+        
         //no default
     }
 
