@@ -103,6 +103,12 @@ function getCampaigns(){
        return postData
     })
 }
+function getEvents(){
+    return axios.get(`http://localhost:2876/api/v1/events`).then((response)=>{ 
+        const postData =  response.data;  // set this to the store for the organisation logged in 
+       return postData
+    })
+}
 
 
 function createPost(postObj,postType){
@@ -134,10 +140,25 @@ function createPost(postObj,postType){
             })
             break ;
 
+        case "Event": 
+            return axios.post(
+                'http://localhost:2876/api/v1/events', 
+                postObj
+                )
+            .then(function (response, error) {
+                if(error){
+                    alert(error)
+                }else{
+                    return response
+                }
+            })
+            break ;
+
+
         //no default
     }
 
 }
 
-export {loginRequest, getOrganisation, registerRequest,getProjects,getCampaigns ,createPost}
+export {loginRequest, getOrganisation, registerRequest,getProjects,getCampaigns,getEvents ,createPost}
 

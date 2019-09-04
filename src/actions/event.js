@@ -1,14 +1,14 @@
-import {createPost, getCampaigns} from '../helpers/requests'
+import {createPost, getEvents} from '../helpers/requests'
 import {startLogout } from './auth'
 
-export const addCampaign = (campaign) => ({
-    type: 'ADD_CAMPAIGN',
-    campaign: campaign
+export const addEvent = (event) => ({
+    type: 'ADD_EVENT',
+    event: event
   });
   
 
 
-export const startAddCampaign = (campaignData,postType) => {
+export const startAddEvent = (eventData,postType) => {
     return (dispatch, getState) => {
       // const uid = getState().auth.uid;
       const {
@@ -16,19 +16,19 @@ export const startAddCampaign = (campaignData,postType) => {
         description = '',
         location = '',
         time = '',
-        duration = '',
+        date = '',
         poster = '',
-      } = campaignData;
-      const campaign = { title, description, location , duration , time ,poster };
+      } = eventData;
+      const event = { title, description, location , date , time ,poster };
       
       //push to DB 
-      console.log(campaign);
+      console.log(event);
   
-      createPost(campaign,postType).then((response) =>{
+      createPost(event,postType).then((response) =>{
         if(typeof (response.data.message) !== 'undefined'){
           alert(response.data.message)
         }else{
-          dispatch(addCampaign(response.data));
+          dispatch(addEvent(response.data));
         }
       });
   
@@ -36,21 +36,21 @@ export const startAddCampaign = (campaignData,postType) => {
   };
 
   // SET_PROJECTS
-export const setCampaigns = (campaign) => ({
-    type: 'SET_CAMPAIGN',
-    campaign: campaign
+export const setEvents = (event) => ({
+    type: 'SET_EVENT',
+    event: event
   });
   
-  export const startSetCampaigns = (projects) => {
+  export const startSetEvents = (projects) => {
     return (dispatch, getState) => {
 
-        getCampaigns().then((response)=>{
+        getEvents().then((response)=>{
         if(typeof (response.message) !== 'undefined'){
             //user inactive
             alert("Account inactive, contact admin")
             dispatch(startLogout())
         }else{
-          dispatch(setCampaigns(response))
+          dispatch(setEvents(response))
         }
         
       })
