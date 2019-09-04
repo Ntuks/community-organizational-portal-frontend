@@ -122,6 +122,12 @@ function getCampaigns(){
        return postData
     })
 }
+function getEvents(){
+    return axios.get(`http://localhost:2876/api/v1/events`).then((response)=>{ 
+        const postData =  response.data;  // set this to the store for the organisation logged in 
+       return postData
+    })
+}
 function getAllOrganisations(){
     return axios.get(`http://localhost:2876/api/v1/organizations`).then((response)=>{ 
         const orgData =  response.data;  // set this to the store for the organisation logged in 
@@ -129,7 +135,6 @@ function getAllOrganisations(){
        return orgData
     })
 }
-
 
 function createPost(postObj,postType){
     switch(postType){
@@ -165,5 +170,15 @@ function createPost(postObj,postType){
 
 }
 
-export {loginRequest, getOrganisation, registerRequest,getProjects,getCampaigns ,createPost, updateOrganisation, getAllOrganisations}
+export {
+    loginRequest, 
+    getOrganisation, 
+    registerRequest,
+    getProjects,
+    getCampaigns,
+    createPost, 
+    updateOrganisation, 
+    getAllOrganisations,
+    getEvents
+}
 

@@ -47,7 +47,7 @@ export const Organizationslist = (props)=> {
                     </div>
                     ) : (
                         props.organisations.map((organisation) => {
-                        return  <OrganizationCard key={organisation.title} {...organisation} />;
+                        return  <OrganizationCard key={organisation._id} {...organisation} />;
                         })
                     )
                 }
@@ -61,7 +61,7 @@ export const Organizationslist = (props)=> {
 
 const mapStateToProps = (state) => {
     return {
-        organisations: state.organisations/** OrganizationsBySearch(state.organisations,state.filters) */
+        organisations: OrganizationsBySearch(state.organisations,state.filters)
     };
   };
 

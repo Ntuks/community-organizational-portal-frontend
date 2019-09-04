@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import GoogleMapReact from 'google-map-react';
 import Marker from './map_marker';
 import { geolocated } from "react-geolocated";
-
+import { OrganizationsBySearch } from '../selectors/organisations';
 
 class Map extends Component {
 
@@ -35,22 +35,25 @@ class Map extends Component {
           defaultZoom={this.props.zoom}
         >
           
-            {/* this.props.organisations.map((org) => {
-              return (
-                <Marker
-                  lat={org.coordinates.lat}
-                  lng={org.coordinates.lng}
-                  text={org.title}
-                />
-              )
-            }) */}
+            {
+              this.props.organisations.map((org) => {
+                return (
+                  <Marker
+                    key={org._id}
+                    lat={org.coordinates.lat}
+                    lng={org.coordinates.lng}
+                    text={org.title}
+                  />
+                )
+              })
+            }
           
           
-          <Marker
+          {/* <Marker
             lat={-33.9248685}
             lng={18.424055299999964}
             text="TEST"
-          />
+          /> */}
   
         </GoogleMapReact>
       </div>
@@ -61,7 +64,7 @@ class Map extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  organisations: state.organisations
+  organisations: OrganizationsBySearch(state.organisations, state.filters)
 });
 
 const enhance = compose(
