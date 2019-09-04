@@ -4,7 +4,8 @@ import ProfileCreatePost from './ProfileCreatePost'
 import ProfilePost from './ProfilePost';
 
 import {startSetProjects} from '../../actions/project';
-
+import {startSetCampaigns} from '../../actions/campaign'
+import {startSetEvents} from '../../actions/event'
 
 function ProfileTimeline(props) {
 
@@ -23,13 +24,15 @@ function ProfileTimeline(props) {
         
 
         }
-        {props.startSetProjects}
+        {props.startSetProjects && props.startSetCampaigns && props.startSetEvents}
         </div>
         
   );
 }
 const mapDispatchToProps = (dispatch) => ({
-  startSetProjects:  dispatch(startSetProjects())
+  startSetProjects:  dispatch(startSetProjects()),
+  startSetCampaigns: dispatch(startSetCampaigns()),
+  startSetEvents: dispatch(startSetEvents())
 });
 
 const mapStateToProps = (state) => {

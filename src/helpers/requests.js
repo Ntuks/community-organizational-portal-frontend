@@ -113,7 +113,6 @@ function updateOrganisation(orgId, organisation){
 function getProjects(){
     return axios.get(`http://localhost:2876/api/v1/projects`).then((response)=>{ 
         const postData =  response.data;  // set this to the store for the organisation logged in 
-        console.log('successfully reeiving projects...', postData)
        return postData
     })
 }

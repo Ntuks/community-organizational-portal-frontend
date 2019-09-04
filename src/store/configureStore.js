@@ -5,6 +5,8 @@ import filtersReducer from '../reducers/filters';
 import authReducer from '../reducers/auth';
 import projectsReducer from '../reducers/projects';
 import campaignsReducer from '../reducers/campaigns';
+import eventsReducer from '../reducers/events';
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -16,6 +18,7 @@ export default () => {
       auth: authReducer,
       projects: projectsReducer,
       campaigns: campaignsReducer,
+      events: eventsReducer,
     }),
     composeEnhancers(applyMiddleware(thunk))
   );
