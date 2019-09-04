@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function OrgCard({ title, imagelink, date, description, admin=false, status, id, startActivateOrg, tagline }) {
+function OrgCard({ title, imagelink, date, description, admin=false, status, _id, startActivateOrg, tagline }) {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
@@ -45,7 +45,7 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, id,
     const handleOnClick = event => {
         event.preventDefault();
         if(!admin)
-            history.push(`/orgProfile:${title}`)
+            history.push(`/orgProfile:${_id}`)
     }
 
     return (

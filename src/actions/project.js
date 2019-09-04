@@ -1,5 +1,7 @@
 import {getProjects, createPost} from '../helpers/requests'
 import {startLogout } from './auth'
+import {history} from '../routers/AppRouter'
+
 export const addProject = (project) => ({
   type: 'ADD_PROJECT',
   project: project
@@ -39,11 +41,14 @@ export const setProjects = (project) => ({
 export const startSetProjects = (projects) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
-    getProjects().then((response)=>{
+    getProjects().then( (response)=>{
       if(typeof (response.message) !== 'undefined'){
           //user inactive
-          alert("Account inactive, contact admin")
+          // alert("Account inactive, contact admin")
+          alert(response.message)
           dispatch(startLogout())
+          // window.location.href = "/"
+          history.push('/')
       }else{
         dispatch(setProjects(response))
       }

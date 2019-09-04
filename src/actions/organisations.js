@@ -1,30 +1,4 @@
-
-export const addOrganisation = (organisation) => ({
-  type: 'ADD_EXPENSE',
-  organisation
-});
-
-export const startAddOrganisation = (organisationData = {}) => {
-  return (dispatch, getState) => {
-    // const uid = getState().auth.uid;
-    // const {
-    //   description = '',
-    //   note = '',
-    //   amount = 0,
-    //   createdAt = 0
-    // } = organisationData;
-    // const expense = { description, note, amount, createdAt };
-
-    //push to DB 
-
-    // return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
-    //   dispatch(addExpense({
-    //     id: ref.key,
-    //     ...expense
-    //   }));
-    //});
-  };
-};
+import { updateOrganisation, getAllOrganisations } from '../helpers/requests';
 
 // REMOVE_EXPENSE
 export const removeOrganisation = ({ id } = {}) => ({
@@ -50,6 +24,7 @@ export const editOrganisation = (id, updates) => ({
 
 export const startEditOrganisation = (id, updates) => {
   return (dispatch, getState) => {
+    
     // const uid = getState().auth.uid;
     // return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
     //   dispatch(editOrganisation(id, updates));
@@ -58,14 +33,18 @@ export const startEditOrganisation = (id, updates) => {
 };
 
 // SET_EXPENSES
-export const setOrganisation = (Organisations) => ({
-  type: 'SET_Organisation',
-  Organisations
+export const setOrganisation = (organisations) => ({
+  type: 'SET_ORG',
+  organisations
 });
 
 export const startSetOrganisation = () => {
   return (dispatch, getState) => {
-    // const uid = getState().auth.uid;
+    getAllOrganisations()
+      .then((orgs) => {
+        dispatch(setOrganisation(orgs))
+      })
+      .catch(error => console.log('The following error occured:', error))
   };
 };
 
