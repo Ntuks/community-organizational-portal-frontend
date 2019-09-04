@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function OrgCard({ title, imagelink, date, description, admin=false, status, id, startActivateOrg }) {
+function OrgCard({ title, imagelink, date, description, admin=false, status, id, startActivateOrg, tagline }) {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
@@ -68,7 +68,7 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, id,
                             {date || "date"}
                         </Typography>
                             <Typography variant="subtitle1" paragraph>
-                            {description || "description"}
+                            {tagline || "tagline"}
                         </Typography>
 
                             { 

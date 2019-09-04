@@ -1,3 +1,4 @@
+
 class OrganizationClass {
 
     constructor( title, date, tagline, location, imagelink, description,areasOfEngagement, pboNpoNum, facebookLink, status, coordinates) {

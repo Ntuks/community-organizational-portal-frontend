@@ -5,6 +5,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+import { connect } from 'react-redux';
+import {startLogout} from '../../actions/auth';
+
+
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
@@ -50,14 +54,23 @@ function Header(props) {
 
             
           </div>
-          : 
-          null
-        
+          : null
           }
-          
+          {
+            props.pageTitle.includes('myProfile')||props.pageTitle.includes('admin') ?
+            <Link to = "/" className={classes.link} onClick = {props.startLogout}>
+              Log Out 
+            </Link>
+          :
+          null
+          }
         </Toolbar>
       </AppBar>
     )
 }
 
-export default Header
+
+const mapDispatchToProps = (dispatch,state) => ({
+  startLogout: (loginObj) => dispatch(startLogout())
+});
+export default connect(undefined, mapDispatchToProps)(Header);

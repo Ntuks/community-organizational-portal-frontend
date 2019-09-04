@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,6 +15,14 @@ import 'react-dates/lib/css/_datepicker.css';
 import '../../styles/vendors/_reactDatesOverrides.scss'
 
 import moment from 'moment';
+
+import Geocode from "react-geocode";
+import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete'
+
+import {startAddProject} from '../../actions/project';
+
+Geocode.setApiKey(process.env.GOOGLE_MAPS_API);
+Geocode.enableDebug();
 
 const useStyles = makeStyles({
 
@@ -61,9 +71,12 @@ const useStyles = makeStyles({
     width: "100px",
     paddingLeft: 10,
   },
+  MUI:{
+     position: 'relative',
+  }
 });
 
-export default function SimpleCard() {
+export const ProfileCreatePost = ({startAddProject, ...rest}) => {
   const classes = useStyles();
   
   const [values, setValues] = React.useState({
@@ -74,7 +87,7 @@ export default function SimpleCard() {
     startDate:  moment(),
     endDate: null,
     focusedInput: null,
-
+    location:"",
   });
   
 
@@ -85,6 +98,30 @@ export default function SimpleCard() {
       [event.target.name]: event.target.value,
     }));
   }
+
+  // Handle suggestions for dropdown of locations
+  // stores lats & longs
+  function onSuggestionSelected(suggestion) {
+    console.log(suggestion);
+    geocodeByPlaceID(suggestion.place_id).then((results) => {
+      const { geometry } = results[0]
+      const coordinates = {
+        lat: geometry.location.lat(),
+        lng: geometry.location.lng(),
+      }
+
+      //need to set state based on whats selected from dropdown
+      setValues(oldValues => ({
+        ...oldValues,
+        'location': suggestion.description,
+        coordinates
+      }));
+      console.log(coordinates);
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
   function handleChangeCalendar({ startDate, endDate }) {
    
     setValues(oldValues => ({
@@ -102,6 +139,43 @@ export default function SimpleCard() {
     }));
   }
 
+  function createAutocompleteRequest(inputValue) {
+    return {
+      input: inputValue,
+      componentRestrictions: {country: "za"},
+    }
+  }
+  function handlePostSubmit(){
+    
+    let end = "indefinite"
+    if(values.endDate){
+      end = values.endDate.toString()
+    }
+
+    if(values.postType==="Project"){
+
+
+          startAddProject({
+            title: values.postTitle,
+            description: values.postDescription,
+            duration: values.startDate.toString()+ " - "+ end,
+            poster: "",
+          },"Project") 
+    }
+    if(values.postType==="Campaign"){
+
+      startAddProject({
+        title: values.postTitle,
+        description: values.postDescription,
+        duration: values.startDate.toString()+ " - "+ end,
+        "location": values.location,
+        time:"",
+        poster: "",
+      },"Project") 
+
+    }
+
+  }
   return (
     <Card className={classes.card}>
       <CardContent >
@@ -132,6 +206,7 @@ export default function SimpleCard() {
           </div>
 
       </div>
+      <br></br>
       <div className={classes.postStructure}>
         <div className={classes.postType}>
           <InputLabel className={classes.inputLabel}>Date: </InputLabel>
@@ -149,11 +224,11 @@ export default function SimpleCard() {
         </div>
           
           { //conditional rendering of time selector based on post-type
-            values.postType!=="Event"? null:(<div className={classes.postType}>
+            values.postType!=="Event"? null:(
+            <div className={classes.postType}>
             <InputLabel htmlFor="postTime" className={classes.inputLabel}>Time: </InputLabel>
             <Select
                 className = {classes.select}
-                defaultValue='none'
                 value={values.postTime}
                 onChange={handleChange}
                 inputProps={{
@@ -208,9 +283,31 @@ export default function SimpleCard() {
                     <MenuItem value={"15:00"}>23:00</MenuItem>
                     <MenuItem value={"16:30"}>23:30</MenuItem>
             </Select>
-        </div>)}
+            </div>)
+      }
+      </div>
+      <div className= {classes.MUI}>
+      {values.postType!=="Event"? null:(
+        <MUIPlacesAutocomplete
+        textFieldProps={{ 
+          value: values.location,
+          placeholder: 'location',
+          onChange: handleChange,
+          name: 'location',
+          style: {
+            width: "50%",
+            'paddingTop': '10px',
+          }
+        }}
+        onSuggestionSelected={onSuggestionSelected}
+        renderTarget={() => (<div />)}
+        createAutocompleteRequest={createAutocompleteRequest}
+      />
+      )}
+
       </div>
       
+      <br></br>
       <textarea 
       name="postDescription"
       className="textArea" 
@@ -222,8 +319,15 @@ export default function SimpleCard() {
 
       <CardActions>
         <Button size="small">Upload Image</Button>
-        <Button size="small">Submit</Button>
+        <Button size="small" onClick = {handlePostSubmit}>Submit</Button>
       </CardActions>
     </Card>
   );
 }
+
+
+const mapDispatchToProps = (dispatch) => ({
+  startAddProject: (project) => dispatch(startAddProject(project))
+});
+
+export default connect(undefined, mapDispatchToProps)(ProfileCreatePost);
