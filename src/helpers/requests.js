@@ -164,7 +164,22 @@ function createPost(postObj,postType){
                 }
             })
             break ;
+        case "Event": 
+            //comment 
+            return axios.post(
+                'http://localhost:2876/api/v1/events', 
+                postObj
+                )
+            .then(function (response, error) {
+                if(error){
+                    alert(error)
+                }else{
+                    return response
+                }
+            })
+            break ;
 
+        
         //no default
     }
 
