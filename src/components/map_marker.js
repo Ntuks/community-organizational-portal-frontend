@@ -1,8 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
-import Place from "@material-ui/icons/Place";
 import { history } from '../routers/AppRouter';
 
 import classNames from 'classnames';
@@ -89,17 +86,15 @@ const styles = theme => ({
 
 class MapMarker extends React.Component {
 
-    handleOnClick = event => {
-        history.push(`/orgProfile:${this.props.text}`)
-    }
+  handleOnClick = event => {
+      history.push(`/orgProfile:${this.props.text}`)
+  }
   render() {
     const { classes, pageid, hoveredCardId } = this.props;
 
     return (
       <div className={classes.markerParent}>
-
-      <span onClick={this.handleOnClick} className={classNames(classes.tooltips_span, pageid == hoveredCardId && classes.niftyHoverBackground)}>{this.props.text}</span>
-  
+        <span onClick={this.handleOnClick} className={classNames(classes.tooltips_span, pageid == hoveredCardId && classes.niftyHoverBackground)}>{this.props.text}</span>
       </div>
     );
   }

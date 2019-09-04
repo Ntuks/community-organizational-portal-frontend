@@ -3,7 +3,7 @@ import { bool } from "prop-types";
 // Get visible expenses
 
 const OrganizationsBySearch = (organisations, {text}) => {
-  if(text !== undefined) {
+  if(typeof(text) !== undefined) {
     text = text && text.trim()
     let words = text.split(" ");
     //loops through each word in text

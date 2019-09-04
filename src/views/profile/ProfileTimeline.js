@@ -6,14 +6,14 @@ import ProfilePost from './ProfilePost';
 import {startSetProjects} from '../../actions/project';
 
 
-export function ProfileTimeline(props) {
+function ProfileTimeline(props) {
 
   return (
         <div className = "scrollableContainer">
         {props.isOwner && <ProfileCreatePost/>}
         {
 
-          props.projects.length === 0 ? (
+          props.projects && props.projects.length === 0 ? (
             null
             ) : (
                 props.projects.map((project) => {
