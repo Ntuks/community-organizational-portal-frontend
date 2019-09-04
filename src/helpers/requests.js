@@ -154,7 +154,7 @@ function createPost(postObj,postType){
             })
             break ;
 
-
+        //comment 
         //no default
     }
 
