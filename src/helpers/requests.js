@@ -112,8 +112,10 @@ function getEvents(){
 
 
 function createPost(postObj,postType){
-    switch(postType){
-        case "Project":
+    
+ 
+        if(postType=== "Project"){
+            
             return axios.post(
                 'http://localhost:2876/api/v1/projects', 
                 postObj
@@ -125,8 +127,7 @@ function createPost(postObj,postType){
                     return response
                 }
             })
-            break ;
-        case "Campaign": 
+        }else if (postType==="Campaign"){
             return axios.post(
                 'http://localhost:2876/api/v1/campaigns', 
                 postObj
@@ -138,9 +139,7 @@ function createPost(postObj,postType){
                     return response
                 }
             })
-            break ;
-
-        case "Event": 
+        }else if (postType==="Event"){
             //comment 
             return axios.post(
                 'http://localhost:2876/api/v1/events', 
@@ -153,13 +152,22 @@ function createPost(postObj,postType){
                     return response
                 }
             })
-            break ;
+        }
 
-        
+        return axios.post(
+            'http://localhost:2876/api/v1/campaigns', 
+            postObj
+            )
+        .then(function (response, error) {
+            if(error){
+                alert(error)
+            }else{
+                return response
+            }
+        })
         //no default
     }
 
-}
 
 export {loginRequest, getOrganisation, registerRequest,getProjects,getCampaigns,getEvents ,createPost}
 
