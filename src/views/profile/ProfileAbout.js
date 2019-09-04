@@ -59,9 +59,9 @@ function SimpleCard(props) {
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    console.log('test')
-    console.log(props.organisation)
-  }, []);
+    console.log('test', props)
+    
+  });
 
   function handleEditProfile(){
     setOpen(true);
@@ -74,7 +74,8 @@ function SimpleCard(props) {
   return (
     <Card className={classes.card}>
       <CardContent>
-      
+      {console.log('fycasd',props.organisation)}
+
         <Typography variant="h3" component="h3" className={classes.editIconPanel}>
         Organisation Bio  {props.isOwner &&<EditIcon onClick={handleEditProfile} className={classes.editIcon} />}
         </Typography>
@@ -135,8 +136,6 @@ function SimpleCard(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  organisation: state.auth.orgData
-})
 
-export default connect(mapStateToProps)(SimpleCard);
+
+export default (SimpleCard);

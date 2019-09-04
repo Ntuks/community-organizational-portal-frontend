@@ -51,7 +51,7 @@ export const Organizationslist = (props)=> {
                         })
                     )
                 }
-                { props.startSetOrganisation}
+                {props.startSetOrganisation}
         
             </GridList>
         </div>

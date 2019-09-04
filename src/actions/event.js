@@ -47,7 +47,7 @@ export const setEvents = (event) => ({
         getEvents().then((response)=>{
         if(typeof (response.message) !== 'undefined'){
             //user inactive
-            alert("Account inactive, contact admin")
+            // alert("Account inactive, contact admin")
             dispatch(startLogout())
         }else{
           dispatch(setEvents(response))

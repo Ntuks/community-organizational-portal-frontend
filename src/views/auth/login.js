@@ -197,7 +197,7 @@ const SignIn = ({startLogin, login}) => {
           }
           else{
             //No role is possessed. 
-            alert("No role Found - Please constact system admin")
+            alert("No role Found - Please contact system admin")
             history.push('/')
           }
         }

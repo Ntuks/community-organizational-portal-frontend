@@ -71,11 +71,11 @@ export const EditProfileDetails = (props)=>{
       }
 
       //need to set state based on whats selected from dropdown
-      // setValues(oldValues => ({
-      //   ...oldValues,
-      //   'location': suggestion.description,
-      //   coordinates
-      // }));
+      setValues(oldValues => ({
+        ...oldValues,
+        'location': suggestion.description,
+        coordinates
+      }));
       console.log(coordinates);
     }).catch((err) => {
       console.log(err)

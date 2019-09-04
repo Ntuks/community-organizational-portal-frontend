@@ -42,7 +42,6 @@ export const startSetOrganisation = () => {
   return (dispatch, getState) => {
     getAllOrganisations()
       .then((orgs) => {
-        console.log('orgs', orgs)
         dispatch(setOrganisation(orgs))
       })
       .catch(error => console.log('The following error occured:', error))
