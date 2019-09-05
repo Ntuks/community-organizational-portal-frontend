@@ -37,7 +37,7 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, _id
         slider: false,
     });
     const handleChange = name => event => {
-        const status = event.target.checked ? 'active' : 'inactive'
+        const status = event.target.checked ? 'ACTIVE' : 'INACTIVE'
         startActivateOrg(title, status)
         setState({ ...state, [name]: event.target.checked });
     };
@@ -76,13 +76,13 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, _id
                                 <FormControlLabel
                                     control={
                                     <Switch
-                                        checked={status === 'active' ? true : false}
+                                        checked={status === 'ACTIVE' ? true : false}
                                         onChange={handleChange('slider')}
                                         value="slider"
                                         color="primary"
                                     />
                                     }
-                                    label={status === 'active' ? "Account Activated" : "Account Deactivated"}
+                                    label={status === 'ACTIVE' ? "Account Activated" : "Account Deactivated"}
                                 />
                             ) : (
                                 <Typography variant="subtitle1" color="primary">

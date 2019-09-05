@@ -24,11 +24,6 @@ export const editOrganisation = (id, updates) => ({
 
 export const startEditOrganisation = (id, updates) => {
   return (dispatch, getState) => {
-    
-    // const uid = getState().auth.uid;
-    // return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
-    //   dispatch(editOrganisation(id, updates));
-    // });
   };
 };
 

@@ -59,8 +59,15 @@ export const login = (loginObj) => ({
     return (dispatch, getState) => {
       return updateOrganisation(id, organisation)
         .then((org) => {
-          console.log(org, 'making it in here');
           dispatch(addOrganisation(id, organisation));
+          let userStore = JSON.parse(localStorage.getItem('user'))
+          console.log('userstroe', userStore)
+          let newStore = {
+            ...userStore,
+            orgData: org
+          } 
+          console.log('newstore', newStore)
+          localStorage.setItem('user', JSON.stringify(newStore))
           return org;
         }).catch((error) => {
           console.log('catching errors:',error);

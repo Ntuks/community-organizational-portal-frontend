@@ -1,7 +1,7 @@
 import React from 'react';
 import OrganizationCard from './card';
 import { connect } from 'react-redux';
-import { OrganizationsByActiveState } from '../selectors/organisations';
+import { startSetOrganisation } from '../actions/organisations';
 
 export const Organizationslist = (props)=> {
     return (
@@ -17,6 +17,7 @@ export const Organizationslist = (props)=> {
                     })
                 )
             }
+            {props.startSetOrganisation}
         </div>
     )
 }
@@ -24,8 +25,11 @@ export const Organizationslist = (props)=> {
 
 const mapStateToProps = (state) => {
     return {
-        organisations: OrganizationsByActiveState(state.organisations,state.filters)
+        organisations: state.organisations
     };
   };
 
-export default connect(mapStateToProps)(Organizationslist);
+const mapDispatchToProps = (dispatch) => ({
+    startSetOrganisation: () => dispatch(startSetOrganisation())
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Organizationslist);

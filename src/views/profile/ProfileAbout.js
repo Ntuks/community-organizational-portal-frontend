@@ -101,14 +101,14 @@ function SimpleCard(props) {
         <Typography variant="h5" component="span">
               PBO/NPO Number:
           </Typography>
-          <Typography variant="body2" >  {props.organisation.pboNpoNum||"n/a"} </Typography>
+          <Typography variant="body2" >  {props.organisation.pboNpoNumber||"n/a"} </Typography>
         <div><br></br></div>
         <Typography variant="h5" component="span">
             Contact Details:
         </Typography>
-        <Typography variant="body2" component="p"> Email: {props.organisation.pboNpo} </Typography>
-        <Typography variant="body2" component="p"> Tel: </Typography>
-        <Typography variant="body2" component="p"> Website: </Typography>
+        <Typography variant="body2" component="p"> Email: {props.organisation.email || ""} </Typography>
+        <Typography variant="body2" component="p"> Tel: {props.organisation.contactNo} </Typography>
+        <Typography variant="body2" component="p"> Facebook Link: {props.organisation.pboNpoNumber}</Typography>
         
       </CardContent>
       <Modal

@@ -87,7 +87,7 @@ const styles = theme => ({
 class MapMarker extends React.Component {
 
   handleOnClick = event => {
-      history.push(`/orgProfile:${this.props.text}`)
+      history.push(`/orgProfile:${this.props._id}`)
   }
   render() {
     const { classes, pageid, hoveredCardId } = this.props;

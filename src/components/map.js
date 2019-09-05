@@ -38,12 +38,16 @@ class Map extends Component {
             {
               this.props.organisations.map((org) => {
                 return (
-                  <Marker
-                    key={org._id}
-                    lat={org.coordinates.lat}
-                    lng={org.coordinates.lng}
-                    text={org.title}
-                  />
+                  org.status === 'ACTIVE' ?
+                    <Marker
+                      key={org._id}
+                      lat={org.coordinates.lat}
+                      lng={org.coordinates.lng}
+                      text={org.title}
+                      _id={org._id}
+                    />
+                  :
+                    null
                 )
               })
             }
