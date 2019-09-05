@@ -108,7 +108,7 @@ export default (state = organisationsReducerDefaultState, action) => {
       return action.organisations;
     case 'ACTIVATE_OR_DEACTIVATE_ORG':
       return state.map((organisation) => {
-        if (organisation.title === action.id) { //title is only temporary, need to change to ID
+        if (organisation._id === action.id) {
           console.log('in here')
           return {
             ...organisation,

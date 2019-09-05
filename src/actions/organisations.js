@@ -1,32 +1,5 @@
 import { updateOrganisation, getAllOrganisations } from '../helpers/requests';
 
-// REMOVE_EXPENSE
-export const removeOrganisation = ({ id } = {}) => ({
-  type: 'REMOVE_EXPENSE',
-  id
-});
-
-export const startRemoveOrganisation = ({ id } = {}) => {
-  return (dispatch, getState) => {
-    // const uid = getState().auth.uid;
-    // return database.ref(`users/${uid}/expenses/${id}`).remove().then(() => {
-    //   dispatch(removeOrganisation({ id }));
-    // });
-  };
-};
-
-// EDIT_EXPENSE
-export const editOrganisation = (id, updates) => ({
-  type: 'EDIT_Organisation',
-  id,
-  updates
-});
-
-export const startEditOrganisation = (id, updates) => {
-  return (dispatch, getState) => {
-  };
-};
-
 // SET_EXPENSES
 export const setOrganisation = (organisations) => ({
   type: 'SET_ORG',
@@ -34,6 +7,7 @@ export const setOrganisation = (organisations) => ({
 });
 
 export const startSetOrganisation = () => {
+  console.log('running startSetOrganisation');
   return (dispatch, getState) => {
     getAllOrganisations()
       .then((orgs) => {
@@ -50,7 +24,12 @@ export const activateOrg = (id, status) => ({
 });
 export const startActivateOrg = (id, status) => {
   return (dispatch, getState) => {
-    dispatch(activateOrg(id, status))
+    updateOrganisation(id, { status })
+      .then(org => {
+        dispatch(activateOrg(id, status))
+      })
+      .catch(error => console.log('activateOrganisation - updateAPI error', error))
+    
   };
 };
 

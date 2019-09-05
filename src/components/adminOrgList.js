@@ -13,7 +13,16 @@ export const Organizationslist = (props)=> {
                 </div>
                 ) : (
                     props.organisations.map((organisation) => {
-                        return  <OrganizationCard key={organisation.title} {...organisation} admin={true} status={organisation.status}/>;
+                        if(props.active && organisation.status === 'ACTIVE'){
+                            return  <OrganizationCard key={organisation.title} {...organisation} admin={true} status={organisation.status}/>;
+                        }
+                        else if(props.inactive && organisation.status === 'INACTIVE') {
+                            return  <OrganizationCard key={organisation.title} {...organisation} admin={true} status={organisation.status}/>;
+                        }
+                        else if (props.active && props.inactive) {
+                            return  <OrganizationCard key={organisation.title} {...organisation} admin={true} status={organisation.status}/>;
+                        }
+                        
                     })
                 )
             }
@@ -25,11 +34,13 @@ export const Organizationslist = (props)=> {
 
 const mapStateToProps = (state) => {
     return {
-        organisations: state.organisations
+        organisations: state.organisations,
+        active: state.filters.active,
+        inactive: state.filters.inactive
     };
   };
 
 const mapDispatchToProps = (dispatch) => ({
-    startSetOrganisation: () => dispatch(startSetOrganisation())
+    startSetOrganisation:  dispatch(startSetOrganisation())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Organizationslist);

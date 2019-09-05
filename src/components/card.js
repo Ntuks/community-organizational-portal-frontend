@@ -34,18 +34,21 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, _id
     const classes = useStyles();
 
     const [state, setState] = React.useState({
-        slider: false,
+        slider: status === 'ACTIVE' ? true:false || false,
     });
     const handleChange = name => event => {
+        console.log('here')
         const status = event.target.checked ? 'ACTIVE' : 'INACTIVE'
-        startActivateOrg(title, status)
+        console.log(status)
+        startActivateOrg(_id, status)
         setState({ ...state, [name]: event.target.checked });
     };
 
     const handleOnClick = event => {
-        event.preventDefault();
-        if(!admin)
+        if(!admin) {
+            event.preventDefault();
             history.push(`/orgProfile:${_id}`)
+        } 
     }
 
     return (
@@ -76,13 +79,13 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, _id
                                 <FormControlLabel
                                     control={
                                     <Switch
-                                        checked={status === 'ACTIVE' ? true : false}
+                                        checked={state.slider}
                                         onChange={handleChange('slider')}
                                         value="slider"
                                         color="primary"
                                     />
                                     }
-                                    label={status === 'ACTIVE' ? "Account Activated" : "Account Deactivated"}
+                                    label={state.slider ? "Account Activated" : "Account Deactivated"}
                                 />
                             ) : (
                                 <Typography variant="subtitle1" color="primary">
