@@ -19,6 +19,7 @@ import Switch from '@material-ui/core/Switch';
 const useStyles = makeStyles(theme => ({
     card: {
         display: 'flex',
+        width: '100%',
         marginBottom: theme.spacing(2),
     },
     cardDetails: {
