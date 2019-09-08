@@ -202,7 +202,7 @@ const SignUp = props => {
           alert("Signup Successful. Please log in")
           history.push('/');
         }else{
-          alert(response.data.message)
+          alert('Register Message:' + response.data.message)
         }
     })
     

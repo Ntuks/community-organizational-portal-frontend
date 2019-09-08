@@ -26,7 +26,7 @@ export const startAddEvent = (eventData,postType) => {
   
       createPost(event,postType).then((response) =>{
         if(typeof (response.data.message) !== 'undefined'){
-          alert(response.data.message)
+          alert('Event Message:' +response.data.message)
         }else{
           dispatch(addEvent(response.data));
         }

@@ -23,7 +23,7 @@ export const startAddProject = (projectData,postType) => {
 
     createPost(project,postType).then((response) =>{
       if(typeof (response.data.message) !== 'undefined'){
-        alert(response.data.message)
+        alert('Project Message:' + response.data.message)
       }else{
         dispatch(addProject(response.data));
       }
@@ -42,10 +42,11 @@ export const startSetProjects = (projects) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
     getProjects().then( (response)=>{
+      console.log('startSetProjects',response.data)
       if(typeof (response.message) !== 'undefined'){
           //user inactive
           // alert("Account inactive, contact admin")
-          alert(response.message)
+          alert('STARTSETPROJECTS Message: ' + response.message)
           dispatch(startLogout())
           // window.location.href = "/"
           history.push('/')

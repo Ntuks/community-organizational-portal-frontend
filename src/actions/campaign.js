@@ -26,7 +26,7 @@ export const startAddCampaign = (campaignData,postType) => {
   
       createPost(campaign,postType).then((response) =>{
         if(typeof (response.data.message) !== 'undefined'){
-          alert(response.data.message)
+          alert('Campaign Message:' + response.data.message)
         }else{
           dispatch(addCampaign(response.data));
         }

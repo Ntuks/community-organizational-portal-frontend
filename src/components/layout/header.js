@@ -32,45 +32,70 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
+  
+
 function Header(props) {
     const classes = useStyles();
+
+    function renderMenu(auth, classes) {
+      if(auth.role === 'Organization Manager') {
+        return (
+        <div>
+          <Typography variant="h6" className={classes.title}>
+            <Link to = {`/myProfile:${props.auth.organizationid}`} className={classes.link}>
+              My Profile
+            </Link>
+            <Link to = "/" className={classes.link} onClick = {props.startLogout}>
+              Log Out 
+            </Link>
+            </Typography>
+          </div>
+          )
+      }
+      else if(auth.role === 'Admin') {
+        return (
+        <div>
+          <Typography variant="h6" className={classes.title}>
+            <Link to = "/" className={classes.link} onClick = {props.startLogout}>
+              Log Out 
+            </Link>
+            </Typography>
+          </div>
+          )
+      }
+      else {
+        return (
+          <div>
+            <Typography variant="h6" className={classes.title}>
+                <Link to = "/sign-up" className={classes.link}>
+                  Organisation Sign Up 
+                </Link>
+                <Link to = "/sign-in" className={classes.link}>
+                  Organisation Sign In 
+                </Link>
+            </Typography>
+            </div>
+        )
+      }
+    }
     return (
         <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link to = "/" className={classes.link}>Community Organisation Portal </Link>
           </Typography>
-          {(props.pageTitle === "home") 
-          ? 
-          <div> 
-          <Typography variant="h6" className={classes.title}>
-              <Link to = "/sign-up" className={classes.link}>
-                Organisation Sign Up 
-              </Link>
-              <Link to = "/sign-in" className={classes.link}>
-                Organisation Sign In 
-              </Link>
-          </Typography>
-
-            
-          </div>
-          : null
-          }
           {
-            props.pageTitle.includes('myProfile')||props.pageTitle.includes('admin') ?
-            <Link to = "/" className={classes.link} onClick = {props.startLogout}>
-              Log Out 
-            </Link>
-          :
-          null
+            renderMenu(props.auth, classes)
           }
         </Toolbar>
       </AppBar>
     )
 }
 
-
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
 const mapDispatchToProps = (dispatch,state) => ({
   startLogout: (loginObj) => dispatch(startLogout())
 });
-export default connect(undefined, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

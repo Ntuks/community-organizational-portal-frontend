@@ -85,7 +85,7 @@ function registerRequest({name, surname,email,password}){
         )
       .then(function (response, error) {
         if(error){
-            alert(error)
+            alert('Register Error:' +error)
           }else{
             return response
           }
@@ -145,7 +145,7 @@ function createPost(postObj,postType){
                 )
             .then(function (response, error) {
                 if(error){
-                    alert(error)
+                    alert('Create Post Error:' + error)
                 }else{
                     return response
                 }
@@ -158,7 +158,7 @@ function createPost(postObj,postType){
                 )
             .then(function (response, error) {
                 if(error){
-                    alert(error)
+                    alert('Campaign Error:' + error)
                 }else{
                     return response
                 }
@@ -172,7 +172,7 @@ function createPost(postObj,postType){
                 )
             .then(function (response, error) {
                 if(error){
-                    alert(error)
+                    alert('Event Message:' + error)
                 }else{
                     return response
                 }
