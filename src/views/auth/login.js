@@ -180,7 +180,7 @@ const SignIn = ({startLogin, login}) => {
       try {
         if (typeof (loginState.message) !== 'undefined'){
           // Message sent if there was an issue with credentials
-          alert(loginState.message)
+          alert('Login Message:' + loginState.message)
         }else{
           //dispatch login to redux
           
@@ -197,14 +197,14 @@ const SignIn = ({startLogin, login}) => {
           }
           else{
             //No role is possessed. 
-            alert("No role Found - Please constact system admin")
+            alert("No role Found - Please contact system admin")
             history.push('/')
           }
         }
 
       }catch{
           // Returned objected not as expected
-          alert("Error-unknown")
+          alert("Login Error-unknown")
           history.push('/')
         }
       

@@ -3,7 +3,7 @@
 
 const filtersReducerDefaultState = {
   text: '',
-  active: false,
+  active: true,
   inactive: true,
 };
 

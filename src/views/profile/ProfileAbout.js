@@ -1,4 +1,6 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -51,24 +53,29 @@ const useStyles = makeStyles(theme =>({
 })
 );
 
-export default function SimpleCard(props) {
+function SimpleCard(props) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    console.log('test', props)
+    
+  });
 
   function handleEditProfile(){
     setOpen(true);
   }
   
-
-  const handleClose = () => {
+  function handleClose() {
     setOpen(false);
   };
 
   return (
     <Card className={classes.card}>
       <CardContent>
-      
+      {console.log('fycasd',props.organisation)}
+
         <Typography variant="h3" component="h3" className={classes.editIconPanel}>
         Organisation Bio  {props.isOwner &&<EditIcon onClick={handleEditProfile} className={classes.editIcon} />}
         </Typography>
@@ -94,14 +101,14 @@ export default function SimpleCard(props) {
         <Typography variant="h5" component="span">
               PBO/NPO Number:
           </Typography>
-          <Typography variant="body2" >  {props.organisation.pboNpoNum||"n/a"} </Typography>
+          <Typography variant="body2" >  {props.organisation.pboNpoNumber||"n/a"} </Typography>
         <div><br></br></div>
         <Typography variant="h5" component="span">
             Contact Details:
         </Typography>
-        <Typography variant="body2" component="p"> Email: {props.organisation.pboNpo} </Typography>
-        <Typography variant="body2" component="p"> Tel: </Typography>
-        <Typography variant="body2" component="p"> Website: </Typography>
+        <Typography variant="body2" component="p"> Email: {props.organisation.email || ""} </Typography>
+        <Typography variant="body2" component="p"> Tel: {props.organisation.contactNo} </Typography>
+        <Typography variant="body2" component="p"> Facebook Link: {props.organisation.pboNpoNumber}</Typography>
         
       </CardContent>
       <Modal
@@ -120,7 +127,7 @@ export default function SimpleCard(props) {
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Oganisation Profile Details </h2>
             <div id="transition-modal-description">
-              <EditProfileDetails organisation={props.organisation}/>
+              <EditProfileDetails organisation={props.organisation} handleClose={handleClose}/>
             </div>
           </div>
         </Fade>
@@ -128,3 +135,7 @@ export default function SimpleCard(props) {
     </Card>
   );
 }
+
+
+
+export default (SimpleCard);

@@ -26,7 +26,7 @@ export const startAddCampaign = (campaignData,postType) => {
   
       createPost(campaign,postType).then((response) =>{
         if(typeof (response.data.message) !== 'undefined'){
-          alert(response.data.message)
+          alert('Campaign Message:' + response.data.message)
         }else{
           dispatch(addCampaign(response.data));
         }
@@ -47,7 +47,7 @@ export const setCampaigns = (campaign) => ({
         getCampaigns().then((response)=>{
         if(typeof (response.message) !== 'undefined'){
             //user inactive
-            alert("Account inactive, contact admin")
+            // alert("Account inactive, contact admin")
             dispatch(startLogout())
         }else{
           dispatch(setCampaigns(response))

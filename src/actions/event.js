@@ -26,7 +26,7 @@ export const startAddEvent = (eventData,postType) => {
   
       createPost(event,postType).then((response) =>{
         if(typeof (response.data.message) !== 'undefined'){
-          alert(response.data.message)
+          alert('Event Message:' +response.data.message)
         }else{
           dispatch(addEvent(response.data));
         }
@@ -47,7 +47,7 @@ export const setEvents = (event) => ({
         getEvents().then((response)=>{
         if(typeof (response.message) !== 'undefined'){
             //user inactive
-            alert("Account inactive, contact admin")
+            // alert("Account inactive, contact admin")
             dispatch(startLogout())
         }else{
           dispatch(setEvents(response))

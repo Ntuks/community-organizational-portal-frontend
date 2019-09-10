@@ -1,4 +1,4 @@
-import {loginRequest,getOrganisation} from '../helpers/requests'
+import { loginRequest,getOrganisation, updateOrganisation } from '../helpers/requests'
 
 
 export const login = (loginObj) => ({
@@ -47,6 +47,31 @@ export const login = (loginObj) => ({
     return (dispatch) => {
         localStorage.removeItem('user')
         return dispatch(logout())  //make logout request 
+    };
+  };
+
+  export const addOrganisation = (id, organisation) => ({
+    type: 'EDIT_AUTH_ORG',
+    id,
+    organisation,
+  });
+  export const startAddOrganisation = (id, organisation) => {
+    return (dispatch, getState) => {
+      return updateOrganisation(id, organisation)
+        .then((org) => {
+          dispatch(addOrganisation(id, organisation));
+          let userStore = JSON.parse(localStorage.getItem('user'))
+          console.log('userstroe', userStore)
+          let newStore = {
+            ...userStore,
+            orgData: org
+          } 
+          console.log('newstore', newStore)
+          localStorage.setItem('user', JSON.stringify(newStore))
+          return org;
+        }).catch((error) => {
+          console.log('catching errors:',error);
+        })
     };
   };
   

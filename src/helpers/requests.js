@@ -60,7 +60,7 @@ function getOrganisation(orgId){
                 //Get request to load organisation data using /:orgToken 
                 return axios.get(`http://localhost:2876/api/v1/organization/${orgId}`).then((response)=>{ 
                     const orgData =  response.data;  // set this to the store for the organisation logged in 
-                   return orgData
+                    return orgData
                 })
                 
                 //Get request to load organisation data using /?var=x - querystring
@@ -85,12 +85,31 @@ function registerRequest({name, surname,email,password}){
         )
       .then(function (response, error) {
         if(error){
-            alert(error)
+            alert('Register Error:' +error)
           }else{
             return response
           }
       })
 }
+
+function updateOrganisation(orgId, organisation){
+    console.log('fockol', orgId, organisation)
+    // Trying to find organisation data to load organisation page.
+    //Get request to load organisation data using /:orgToken 
+    const objToPut = {
+        ...organisation
+    }
+    console.log(objToPut);
+    return axios.put(`http://localhost:2876/api/v1/organization/${orgId}`, objToPut)
+        .then((response)=> { 
+            console.log('focko2l', response.data);
+            const orgData =  response.data;  // set this to the store for the organisation logged in 
+            return orgData
+        }).catch((error) =>{
+            console.log('bjhbhjkbjk',error)
+        })
+}
+
 function getProjects(){
     return axios.get(`http://localhost:2876/api/v1/projects`).then((response)=>{ 
         const postData =  response.data;  // set this to the store for the organisation logged in 
@@ -109,7 +128,13 @@ function getEvents(){
        return postData
     })
 }
-
+function getAllOrganisations(){
+    return axios.get(`http://localhost:2876/api/v1/organizations`).then((response)=>{ 
+        const orgData =  response.data;  // set this to the store for the organisation logged in 
+        console.log('successfully receiving data...',orgData);
+       return orgData
+    })
+}
 
 function createPost(postObj,postType){
     
@@ -122,7 +147,7 @@ function createPost(postObj,postType){
                 )
             .then(function (response, error) {
                 if(error){
-                    alert(error)
+                    alert('Create Post Error:' + error)
                 }else{
                     return response
                 }
@@ -134,7 +159,7 @@ function createPost(postObj,postType){
                 )
             .then(function (response, error) {
                 if(error){
-                    alert(error)
+                    alert('Campaign Error:' + error)
                 }else{
                     return response
                 }
@@ -147,7 +172,7 @@ function createPost(postObj,postType){
                 )
             .then(function (response, error) {
                 if(error){
-                    alert(error)
+                    alert('Event Message:' + error)
                 }else{
                     return response
                 }
@@ -169,5 +194,15 @@ function createPost(postObj,postType){
     }
 
 
-export {loginRequest, getOrganisation, registerRequest,getProjects,getCampaigns,getEvents ,createPost}
+export {
+    loginRequest, 
+    getOrganisation, 
+    registerRequest,
+    getProjects,
+    getCampaigns,
+    createPost, 
+    updateOrganisation, 
+    getAllOrganisations,
+    getEvents
+}
 

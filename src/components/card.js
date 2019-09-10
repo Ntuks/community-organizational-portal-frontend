@@ -19,6 +19,7 @@ import Switch from '@material-ui/core/Switch';
 const useStyles = makeStyles(theme => ({
     card: {
         display: 'flex',
+        width: '100%',
         marginBottom: theme.spacing(2),
     },
     cardDetails: {
@@ -30,22 +31,25 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function OrgCard({ title, imagelink, date, description, admin=false, status, id, startActivateOrg, tagline }) {
+function OrgCard({ title, imagelink, date, description, admin=false, status, _id, startActivateOrg, tagline }) {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
-        slider: false,
+        slider: status === 'ACTIVE' ? true:false || false,
     });
     const handleChange = name => event => {
-        const status = event.target.checked ? 'active' : 'inactive'
-        startActivateOrg(title, status)
+        console.log('here')
+        const status = event.target.checked ? 'ACTIVE' : 'INACTIVE'
+        console.log(status)
+        startActivateOrg(_id, status)
         setState({ ...state, [name]: event.target.checked });
     };
 
     const handleOnClick = event => {
-        event.preventDefault();
-        if(!admin)
-            history.push(`/orgProfile:${title}`)
+        if(!admin) {
+            event.preventDefault();
+            history.push(`/orgProfile:${_id}`)
+        } 
     }
 
     return (
@@ -76,13 +80,13 @@ function OrgCard({ title, imagelink, date, description, admin=false, status, id,
                                 <FormControlLabel
                                     control={
                                     <Switch
-                                        checked={status === 'active' ? true : false}
+                                        checked={state.slider}
                                         onChange={handleChange('slider')}
                                         value="slider"
                                         color="primary"
                                     />
                                     }
-                                    label={status === 'active' ? "Account Activated" : "Account Deactivated"}
+                                    label={state.slider ? "Account Activated" : "Account Deactivated"}
                                 />
                             ) : (
                                 <Typography variant="subtitle1" color="primary">
