@@ -1,4 +1,4 @@
-import {createPost, getEvents} from '../helpers/requests'
+import {createPost, getEvents,editPost, deleteEvent} from '../helpers/requests'
 import {startLogout } from './auth'
 
 export const addEvent = (event) => ({
@@ -35,13 +35,13 @@ export const startAddEvent = (eventData,postType) => {
     };
   };
 
-  // SET_PROJECTS
+  // SET_EVENTS
 export const setEvents = (event) => ({
     type: 'SET_EVENT',
     event: event
   });
   
-  export const startSetEvents = (projects) => {
+  export const startSetEvents = (events) => {
     return (dispatch, getState) => {
 
         getEvents().then((response)=>{
@@ -66,3 +66,40 @@ export const setEvents = (event) => ({
       dispatch(clearEvents())
     }
   }
+
+  // REMOVE_EVENT
+export const removeEvent = ({ _id } = {}) => ({
+  type: 'REMOVE_EVENT',
+  _id
+});
+
+export const startRemoveEvent = ({ _id } = {}) => {
+  return (dispatch, getState) => {
+    // const uid = getState().auth.uid;
+    // return database.ref(`users/${uid}/expenses/${id}`).remove().then(() => {
+      deleteEvent(_id ).then(()=>{
+        dispatch(removeEvent({ _id }));
+        
+      })
+    // });
+
+  };
+};
+
+// EDIT_EVENT
+export const editEvent = (_id, updates) => ({
+  type: 'EDIT_EVENT',
+  _id,
+  updates
+});
+
+export const startEditEvent = (_id, updates, postType) => {
+  return (dispatch, getState) => {
+    // const uid = getState().auth.uid;
+    // return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
+      editPost(_id, updates, postType).then(()=>{
+      dispatch(editEvent(_id, updates));
+      })
+    // });
+  };
+};

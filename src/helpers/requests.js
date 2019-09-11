@@ -128,6 +128,7 @@ function getEvents(){
        return postData
     })
 }
+
 function getAllOrganisations(){
     return axios.get(`http://localhost:2876/api/v1/organizations`).then((response)=>{ 
         const orgData =  response.data;  // set this to the store for the organisation logged in 
@@ -135,6 +136,8 @@ function getAllOrganisations(){
        return orgData
     })
 }
+
+//need a get organisation id posts, events and projects route
 
 function createPost(postObj,postType){
     
@@ -193,6 +196,82 @@ function createPost(postObj,postType){
         //no default
     }
 
+    function editPost(_id,updates,postType){
+    
+ 
+        if(postType=== "Project"){
+            
+            return axios.put(
+                `http://localhost:2876/api/v1/projects/${_id}`, 
+                updates
+                )
+            .then(function (response, error) {
+                if(error){
+                    alert('Create Post Error:' + error)
+                }else{
+                    return response
+                }
+            })
+        }else if (postType==="Campaign"){
+            return axios.put(
+                `http://localhost:2876/api/v1/campaigns/${_id}`, 
+                updates
+                )
+            .then(function (response, error) {
+                if(error){
+                    alert('Campaign Error:' + error)
+                }else{
+                    return response
+                }
+            })
+        }else if (postType==="Event"){
+            //comment 
+            return axios.put(
+                `http://localhost:2876/api/v1/events/${_id}`, 
+                updates
+                )
+            .then(function (response, error) {
+                if(error){
+                    alert('Event Message:' + error)
+                }else{
+                    return response
+                }
+            })
+        }
+        //default
+        return axios.put(
+            `http://localhost:2876/api/v1/campaigns/${_id}`, 
+            updates
+            )
+        .then(function (response, error) {
+            if(error){
+                alert(error)
+            }else{
+                return response
+            }
+        })
+    
+    }
+    
+
+    function deleteProject(_id){
+        return axios.delete(`http://localhost:2876/api/v1/projects/${_id}`).then((response)=>{ 
+            const postData =  response.data;  // set this to the store for the organisation logged in 
+           return postData
+        })
+    }
+    function deleteCampaign(_id){
+        return axios.delete(`http://localhost:2876/api/v1/campaigns/${_id}`).then((response)=>{ 
+            const postData =  response.data;  // set this to the store for the organisation logged in 
+           return postData
+        })
+    }
+    function deleteEvent(_id){
+        return axios.delete(`http://localhost:2876/api/v1/events/${_id}`).then((response)=>{ 
+            const postData =  response.data;  // set this to the store for the organisation logged in 
+           return postData
+        })
+    }
 
 export {
     loginRequest, 
@@ -203,6 +282,10 @@ export {
     createPost, 
     updateOrganisation, 
     getAllOrganisations,
-    getEvents
+    getEvents,
+    deleteProject,
+    deleteCampaign,
+    deleteEvent,
+    editPost
 }
 

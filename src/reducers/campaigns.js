@@ -11,10 +11,10 @@ export default (state = campaignsReducerDefaultState, action) => {
         action.campaign
       ];
     case 'REMOVE_CAMPAIGN':
-      return state.filter(({ id }) => id !== action.id);
+      return state.filter(({ _id }) => _id !== action._id);
     case 'EDIT_CAMPAIGN':
       return state.map((campaign) => {
-        if (campaign.id === action.id) {
+        if (campaign._id === action._id) {
           return {
             ...campaign,
             ...action.updates

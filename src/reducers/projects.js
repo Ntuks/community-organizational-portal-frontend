@@ -11,10 +11,10 @@ export default (state = projectsReducerDefaultState, action) => {
         action.project
       ];
     case 'REMOVE_PROJECT':
-      return state.filter(({ id }) => id !== action.id);
+      return state.filter(({ _id }) => _id !== action._id);
     case 'EDIT_PROJECT':
       return state.map((project) => {
-        if (project.id === action.id) {
+        if (project._id === action._id) {
           return {
             ...project,
             ...action.updates

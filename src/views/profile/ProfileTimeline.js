@@ -18,7 +18,31 @@ function ProfileTimeline(props) {
             null
             ) : (
                 props.projects.map((project) => {
-                return  <ProfilePost key={project._id} postType ="Project" {...project} isOwner ={props.isOwner} />;
+                return  <ProfilePost key={project._id} postType ="Project" {...project} isOwner ={props.isOwner} id = {project._id} />;
+                })
+            )
+        
+
+        }
+        {
+
+          props.campaigns && props.campaigns.length === 0 ? (
+            null
+            ) : (
+                props.campaigns.map((campaign) => {
+                return  <ProfilePost key={campaign._id} postType ="Campaign" {...campaign} isOwner ={props.isOwner} id = {campaign._id} />;
+                })
+            )
+        
+
+        }
+        {
+
+          props.events && props.events.length === 0 ? (
+            null
+            ) : (
+                props.events.map((event) => {
+                return  <ProfilePost key={event._id} postType ="Event" {...event} isOwner ={props.isOwner} _id = {event._id} />;
                 })
             )
         
@@ -37,7 +61,9 @@ function ProfileTimeline(props) {
 
 const mapStateToProps = (state) => {
   return {
-      projects: state.projects
+      projects: state.projects,
+      campaigns: state.campaigns,
+      events: state.events,
   };
 };
 

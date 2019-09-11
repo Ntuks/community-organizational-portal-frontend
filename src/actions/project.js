@@ -1,4 +1,4 @@
-import {getProjects, createPost} from '../helpers/requests'
+import {getProjects, createPost, editPost, deleteProject} from '../helpers/requests'
 import {startLogout } from './auth'
 import {history} from '../routers/AppRouter'
 
@@ -71,35 +71,40 @@ export const startclearProjects= ()=>{
 
 
 
-// // REMOVE_EXPENSE
-// export const removeOrganisation = ({ id } = {}) => ({
-//   type: 'REMOVE_EXPENSE',
-//   id
-// });
+// REMOVE_PROJECT
+export const removeProject = ({ _id } = {}) => ({
+  type: 'REMOVE_PROJECT',
+  _id
+});
 
-// export const startRemoveOrganisation = ({ id } = {}) => {
-//   return (dispatch, getState) => {
-//     // const uid = getState().auth.uid;
-//     // return database.ref(`users/${uid}/expenses/${id}`).remove().then(() => {
-//     //   dispatch(removeOrganisation({ id }));
-//     // });
+export const startRemoveProject = ({ _id } = {}) => {
+  return (dispatch, getState) => {
+    // const uid = getState().auth.uid;
+    // return database.ref(`users/${uid}/expenses/${id}`).remove().then(() => {
+      deleteProject(_id ).then(()=>{
+        dispatch(removeProject({ _id }));
 
-//   };
-// };
+      })
+    // });
 
-// // EDIT_EXPENSE
-// export const editOrganisation = (id, updates) => ({
-//   type: 'EDIT_Organisation',
-//   id,
-//   updates
-// });
+  };
+};
 
-// export const startEditOrganisation = (id, updates) => {
-//   return (dispatch, getState) => {
-//     // const uid = getState().auth.uid;
-//     // return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
-//     //   dispatch(editOrganisation(id, updates));
-//     // });
-//   };
-// };
+// EDIT_PROJECT
+export const editProject = (_id, updates) => ({
+  type: 'EDIT_PROJECT',
+  _id,
+  updates
+});
+
+export const startEditProject = (_id, updates, postType) => {
+  return (dispatch, getState) => {
+    // const uid = getState().auth.uid;
+    // return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
+      editPost(_id, updates, postType).then(()=>{
+        dispatch(editProject(_id, updates));
+      })
+    // });
+  };
+};
 

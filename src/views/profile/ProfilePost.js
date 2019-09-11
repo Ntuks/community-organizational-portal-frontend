@@ -1,6 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux'
+
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import Modal from '@material-ui/core/Modal';
+
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -12,9 +19,16 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+import { startEditProject, startRemoveProject } from '../../actions/project';
+import { startEditEvent, startRemoveEvent } from '../../actions/event';
+import { startEditCampaign, startRemoveCampaign } from '../../actions/campaign';
+import EditPost from './editPost'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -37,16 +51,50 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
-export default function ProfilePost(props) {
+export function ProfilePost(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const {title='', description='', duration='', location='',startDate='', endDate='', postType} = props
+  const {title='', description='', duration='', location='',startDate='', endDate='', postType, isOwner=false ,_id} = props
   // function handleExpandClick() {
   //   setExpanded(!expanded);
   // }
 
+  const [open, setOpen] = React.useState(false);
+  
+  function handleClose() {
+    setOpen(false);
+  };
+
+   const handleEdit = (event) => {
+     if(isOwner){
+      
+       setOpen(true);
+     }
+  }
+  const handleDelete = (event) => {
+    if(isOwner){
+      if (postType === 'Project'){
+        props.startRemoveProject({_id})
+      }else if (postType === 'Event'){
+        props.startRemoveEvent({_id})
+      }else if(postType === 'Campaign'){
+        props.startRemoveCampaign({_id})
+      }
+    }
+ }
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -73,12 +121,17 @@ export default function ProfilePost(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+      {isOwner?
+        <div>
+            <IconButton aria-label="edit">
+              <CreateIcon onClick={handleEdit}/>
+            </IconButton>
+            <IconButton aria-label="delete">
+              <DeleteIcon onClick={handleDelete} />
+            </IconButton>
+        </div>
+        : null
+      }
         {//<IconButton
         //   className={clsx(classes.expand, {
         //     [classes.expandOpen]: expanded,
@@ -121,6 +174,36 @@ export default function ProfilePost(props) {
       //   </CardContent>
       // </Collapse>
     }
+    <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Oganisation Profile Details </h2>
+            <div id="transition-modal-description">
+              <EditPost {...props}  handleClose={handleClose}/>
+            </div>
+          </div>
+        </Fade>
+      </Modal>
     </Card>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  // startLogin: (loginObj) => dispatch(startLogin(loginObj)),
+  startRemoveProject: (id)=>dispatch (startRemoveProject(id)),
+  startRemoveEvent: (id)=>dispatch (startRemoveEvent(id)),
+  startRemoveCampaign: (id)=>dispatch (startRemoveCampaign(id))
+});
+
+export default connect(undefined, mapDispatchToProps)(ProfilePost);
