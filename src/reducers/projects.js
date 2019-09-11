@@ -26,6 +26,8 @@ export default (state = projectsReducerDefaultState, action) => {
     case 'SET_PROJECT':
       return action.project;
 
+    case 'CLEAR_PROJECT':
+      return []
     default:
       return state;
   }

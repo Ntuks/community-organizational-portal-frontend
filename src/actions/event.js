@@ -56,4 +56,13 @@ export const setEvents = (event) => ({
       })
     };
   };
+
+  export const clearEvents = () => ({
+    type: 'CLEAR_EVENT',
+  });
   
+  export const startclearEvents= ()=>{
+    return (dispatch, getState) => {
+      dispatch(clearEvents())
+    }
+  }

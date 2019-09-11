@@ -25,7 +25,9 @@ export default (state = campaignsReducerDefaultState, action) => {
       });
     case 'SET_CAMPAIGN':
       return action.campaign;
-
+    
+    case 'CLEAR_CAMPAIGN':
+      return []
     default:
       return state;
   }

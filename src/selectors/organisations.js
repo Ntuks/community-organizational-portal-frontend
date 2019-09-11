@@ -52,7 +52,7 @@ const OrganizationsBySearch = (organisations, {text}) => {
   })
   //checking for exact match and placing at top
   //incomplete
-  console.log('master',master);
+  //console.log('master',master);
   return master;
 };
 

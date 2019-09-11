@@ -38,6 +38,7 @@ export const setProjects = (project) => ({
   project: project
 });
 
+
 export const startSetProjects = (projects) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
@@ -58,6 +59,14 @@ export const startSetProjects = (projects) => {
   };
 };
 
+export const clearProjects = () => ({
+  type: 'CLEAR_PROJECT'
+});
+export const startclearProjects= ()=>{
+  return (dispatch, getState) => {
+    dispatch(clearProjects())
+  }
+}
 
 
 

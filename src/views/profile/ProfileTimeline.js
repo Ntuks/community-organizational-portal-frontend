@@ -18,7 +18,7 @@ function ProfileTimeline(props) {
             null
             ) : (
                 props.projects.map((project) => {
-                return  <ProfilePost key={project._id} postType ="Project" {...project}/>;
+                return  <ProfilePost key={project._id} postType ="Project" {...project} isOwner ={props.isOwner} />;
                 })
             )
         

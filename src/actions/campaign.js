@@ -57,3 +57,13 @@ export const setCampaigns = (campaign) => ({
     };
   };
   
+  export const clearCampaigns = () => ({
+    type: 'CLEAR_CAMPAIGN'
+  });
+  
+  export const startclearCampaigns= ()=>{
+    return (dispatch, getState) => {
+      dispatch(clearCampaigns())
+    }
+  }
+  

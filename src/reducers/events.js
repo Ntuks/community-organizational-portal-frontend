@@ -25,7 +25,9 @@ export default (state = eventsReducerDefaultState, action) => {
       });
     case 'SET_EVENT':
       return action.event;
-
+    
+      case 'CLEAR_EVENT':
+          return []
     default:
       return state;
   }
