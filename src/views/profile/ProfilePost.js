@@ -25,6 +25,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import AlertDialogSlide from '../../components/dialog'
+
 import { startEditProject, startRemoveProject } from '../../actions/project';
 import { startEditEvent, startRemoveEvent } from '../../actions/event';
 import { startEditCampaign, startRemoveCampaign } from '../../actions/campaign';
@@ -77,6 +79,25 @@ export function ProfilePost(props) {
   // function handleExpandClick() {
   //   setExpanded(!expanded);
   // }
+  const [openNotification, setOpenNotification] = React.useState({
+    open: false,
+    message: ''
+  });
+  
+  function handleClickOpenNotification(message) {
+    setOpenNotification({
+      open: true,
+      message
+    });
+  }
+
+  function handleClickCloseNotification() {
+    setOpenNotification({
+      open: false,
+      message: null
+    });
+  }
+
 
   const [open, setOpen] = React.useState(false);
   
@@ -94,10 +115,13 @@ export function ProfilePost(props) {
     if(isOwner){
       if (postType === 'Project'){
         props.startRemoveProject({_id})
+        handleClickOpenNotification("Project Removed")
       }else if (postType === 'Event'){
         props.startRemoveEvent({_id})
+        handleClickOpenNotification("Event Removed")
       }else if(postType === 'Campaign'){
         props.startRemoveCampaign({_id})
+        handleClickOpenNotification("Campaign Removed")
       }
     }
  }
@@ -115,7 +139,7 @@ export function ProfilePost(props) {
           </IconButton>
         }
         title={title}
-        subheader={postType==='Project'? ("Duration: "+duration) : ("Start: "+date ) }
+        subheader={postType!=='Event'? ("Duration: "+duration) : ("Start: "+date ) }
       />
       <CardMedia
         className={classes.media}
@@ -151,6 +175,7 @@ export function ProfilePost(props) {
         //   <ExpandMoreIcon />
         // </IconButton>
       }
+      <AlertDialogSlide handleClickOpen ={handleClickOpenNotification} handleClose = {handleClickCloseNotification} open ={openNotification}/>
       </CardActions>{
 
       
@@ -198,7 +223,7 @@ export function ProfilePost(props) {
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Oganisation Profile Details </h2>
             <div id="transition-modal-description">
-              <EditPost {...props}  handleClose={handleClose}/>
+              <EditPost {...props}  handleClose={handleClose}  handleClickOpenNotification= {handleClickOpenNotification}/>
             </div>
           </div>
         </Fade>

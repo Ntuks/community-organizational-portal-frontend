@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 export const EditPost = (props)=>{
   const classes = useStyles();
   
-  const {title, description, duration, location,date, postType, isOwner=false ,_id} = props
+  const {title, description, duration, location,date, postType, isOwner=false ,_id, handleClickOpenNotification} = props
 
   const [values, setValues] = React.useState({
     title: title,
@@ -63,11 +63,13 @@ export const EditPost = (props)=>{
     let updates = values
     if (postType === 'Project'){
       props.startEditProject(_id, updates, postType)
+      handleClickOpenNotification("Project Edited")
     }else if (postType === 'Event'){
       props.startEditEvent(_id, updates, postType)
-      
+      handleClickOpenNotification("Event Edited")
     }else if(postType === 'Campaign'){
       props.startEditCampaign(_id, updates, postType)
+      handleClickOpenNotification("Campaign Edited")
     }
     
   }
