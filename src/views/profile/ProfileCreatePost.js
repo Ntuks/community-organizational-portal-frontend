@@ -23,6 +23,8 @@ import {startAddProject} from '../../actions/project';
 import {startAddCampaign} from '../../actions/campaign';
 import {startAddEvent} from '../../actions/event';
 
+import AlertDialogSlide from '../../components/dialog'
+
 Geocode.setApiKey(process.env.GOOGLE_MAPS_API);
 Geocode.enableDebug();
 
@@ -92,6 +94,24 @@ export const ProfileCreatePost = ({startAddProject,startAddCampaign, startAddEve
     location:"",
   });
   
+  const [open, setOpen] = React.useState({
+    open: false,
+    message: ''
+  });
+  
+  function handleClickOpen(message) {
+    setOpen({
+      open: true,
+      message
+    });
+  }
+
+  function handleClose() {
+    setOpen({
+      open: false,
+      message: null
+    });
+  }
 
   function handleChange(event) {
     event.persist();
@@ -163,6 +183,7 @@ export const ProfileCreatePost = ({startAddProject,startAddCampaign, startAddEve
             duration: values.startDate.toString()+ " - "+ end,
             poster: "",
           },"Project") 
+          handleClickOpen("Project Post added")
     }
     if(values.postType==="Campaign"){
 
@@ -174,7 +195,7 @@ export const ProfileCreatePost = ({startAddProject,startAddCampaign, startAddEve
         time:"",
         poster: "",
       },"Campaign") 
-
+      handleClickOpen("Campaign Post added")
     }
     if(values.postType==="Event"){
       
@@ -186,7 +207,7 @@ export const ProfileCreatePost = ({startAddProject,startAddCampaign, startAddEve
         time:values.postTime,
         poster: "",
       },"Event") 
-
+      handleClickOpen("Event Post added")
     }
 
   }
@@ -335,6 +356,7 @@ export const ProfileCreatePost = ({startAddProject,startAddCampaign, startAddEve
         <Button size="small">Upload Image</Button>
         <Button size="small" onClick = {handlePostSubmit}>Submit</Button>
       </CardActions>
+      <AlertDialogSlide handleClickOpen ={handleClickOpen} handleClose = {handleClose} open ={open}/>
     </Card>
   );
 }
