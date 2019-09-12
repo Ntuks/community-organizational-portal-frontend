@@ -67,7 +67,7 @@ const useStyles = makeStyles(theme => ({
 export function ProfilePost(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const {title='', description='', duration='', location='',startDate='', endDate='', postType, isOwner=false ,_id} = props
+  const {title='', description='', duration='', location='', date='', postType, time = '', isOwner=false ,_id} = props
   // function handleExpandClick() {
   //   setExpanded(!expanded);
   // }
@@ -109,7 +109,7 @@ export function ProfilePost(props) {
           </IconButton>
         }
         title={title}
-        subheader={postType==='Project'? ("Duration: "+duration) : ("Start: "+startDate +" end: "+endDate) }
+        subheader={postType==='Project'? ("Duration: "+duration) : ("Start: "+date ) }
       />
       <CardMedia
         className={classes.media}
@@ -117,6 +117,8 @@ export function ProfilePost(props) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
+          {time!==''?<span> {time}  <br></br></span>: null }
+          {location!==''?<span> {location}  <br></br></span>: null }
           {description}
         </Typography>
       </CardContent>

@@ -20,6 +20,8 @@ import Geocode from "react-geocode";
 import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete'
 
 import {startAddProject} from '../../actions/project';
+import {startAddCampaign} from '../../actions/campaign';
+import {startAddEvent} from '../../actions/event';
 
 Geocode.setApiKey(process.env.GOOGLE_MAPS_API);
 Geocode.enableDebug();
@@ -76,7 +78,7 @@ const useStyles = makeStyles({
   }
 });
 
-export const ProfileCreatePost = ({startAddProject, ...rest}) => {
+export const ProfileCreatePost = ({startAddProject,startAddCampaign, startAddEvent, ...rest}) => {
   const classes = useStyles();
   
   const [values, setValues] = React.useState({
@@ -102,7 +104,7 @@ export const ProfileCreatePost = ({startAddProject, ...rest}) => {
   // Handle suggestions for dropdown of locations
   // stores lats & longs
   function onSuggestionSelected(suggestion) {
-    console.log(suggestion);
+    //console.log(suggestion);
     geocodeByPlaceID(suggestion.place_id).then((results) => {
       const { geometry } = results[0]
       const coordinates = {
@@ -116,7 +118,7 @@ export const ProfileCreatePost = ({startAddProject, ...rest}) => {
         'location': suggestion.description,
         coordinates
       }));
-      console.log(coordinates);
+      //console.log(coordinates);
     }).catch((err) => {
       console.log(err)
     })
@@ -164,14 +166,26 @@ export const ProfileCreatePost = ({startAddProject, ...rest}) => {
     }
     if(values.postType==="Campaign"){
 
-      startAddProject({
+      startAddCampaign({
         title: values.postTitle,
         description: values.postDescription,
         duration: values.startDate.toString()+ " - "+ end,
         "location": values.location,
         time:"",
         poster: "",
-      },"Project") 
+      },"Campaign") 
+
+    }
+    if(values.postType==="Event"){
+      
+      startAddEvent({
+        title: values.postTitle,
+        description: values.postDescription,
+        date: values.startDate.toString(),
+        "location": values.location,
+        time:values.postTime,
+        poster: "",
+      },"Event") 
 
     }
 
@@ -327,7 +341,9 @@ export const ProfileCreatePost = ({startAddProject, ...rest}) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddProject: (project) => dispatch(startAddProject(project))
+  startAddProject: (project, postType) => dispatch(startAddProject(project,postType)),
+  startAddCampaign: (project, postType) => dispatch(startAddCampaign(project, postType)),
+  startAddEvent: (project, postType) => dispatch(startAddEvent(project, postType))
 });
 
 export default connect(undefined, mapDispatchToProps)(ProfileCreatePost);

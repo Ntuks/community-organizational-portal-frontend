@@ -73,8 +73,9 @@ const findOrg = (organisations, authOrg) =>{
     //console.log(authOrg);
     const path = history.location.pathname
     const id = path.substring(path.indexOf(':')+1).trim()
+    console.log(id)
     //console.log("banter : ", id);
-    if(Object.keys(authOrg).length > 0) {
+    if(Object.keys(authOrg).length > 0 && authOrg.role !=="ADMIN") {
         //console.log('authorg',authOrg)
         return authOrg.orgData
     }

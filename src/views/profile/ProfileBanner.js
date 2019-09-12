@@ -39,6 +39,11 @@ const useStyles = makeStyles({
 
 export default function MediaCard(props) {
   const classes = useStyles();
+  let imageLink = "/static/images/generic/register.jpg"
+  if (typeof (props.organisation.imagelink) !== 'undefined'){
+    imageLink = props.organisation.imagelink
+  }
+  
 
   return (
     <Card className={classes.card}>
@@ -49,7 +54,7 @@ export default function MediaCard(props) {
           title="ProfileBanner"  
         >
             <Grid>
-                <Avatar alt="IMG" src={`${props.organisation.imagelink||"/static/images/generic/register.jpg"}`} className={classes.bigAvatar} />
+                <Avatar alt="IMG" src={`${imageLink}`} className={classes.bigAvatar} />
             </Grid>
         </CardMedia>
         <CardContent className={classes.cardContent}>

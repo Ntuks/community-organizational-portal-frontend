@@ -142,48 +142,41 @@ function getAllOrganisations() {
 //need a get organisation id posts, events and projects route
 
 function createPost(postObj, postType) {
-  if (postType === "Project") {
-    return axios
-      .post("http://localhost:7900/api/v1/projects", postObj)
-      .then(function(response, error) {
-        if (error) {
-          alert("Create Post Error:" + error);
-        } else {
-          return response;
-        }
-      });
-  } else if (postType === "Campaign") {
-    return axios
-      .post("http://localhost:7900/api/v1/campaigns", postObj)
-      .then(function(response, error) {
-        if (error) {
-          alert("Campaign Error:" + error);
-        } else {
-          return response;
-        }
-      });
-  } else if (postType === "Event") {
-    //comment
-    return axios
-      .post("http://localhost:7900/api/v1/events", postObj)
-      .then(function(response, error) {
-        if (error) {
-          alert("Event Message:" + error);
-        } else {
-          return response;
-        }
-      });
-  }
+  
+    if (postType === "Project") {
+      return axios
+        .post("http://localhost:7900/api/v1/projects", postObj)
+        .then(function(response, error) {
+          if (error) {
+            alert("Create Post Error:" + error);
+          } else {
+            return response;
+          }
+        });
+    } else if (postType === "Campaign") {
+      return axios
+        .post("http://localhost:7900/api/v1/campaigns", postObj)
+        .then(function(response, error) {
+          if (error) {
+            alert("Campaign Error:" + error);
+          } else {
+            return response;
+          }
+        });
+    } else if (postType === "Event") {
+      //comment
+      return axios
+        .post("http://localhost:7900/api/v1/events", postObj)
+        .then(function(response, error) {
+          if (error) {
+            alert("Event Message:" + error);
+          } else {
+            return response;
+          }
+        });
+    }
 
-  return axios
-    .post("http://localhost:7900/api/v1/campaigns", postObj)
-    .then(function(response, error) {
-      if (error) {
-        alert(error);
-      } else {
-        return response;
-      }
-    });
+
   //no default
 }
 

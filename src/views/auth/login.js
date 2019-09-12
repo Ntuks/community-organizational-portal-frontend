@@ -191,7 +191,7 @@ const SignIn = ({startLogin, login}) => {
                 history.push(`/myProfile:${loginState.organization}`)
 
                 // history.push('/orgProfile:orgName')
-          }else if(loginState.role==='Admin'){
+          }else if(loginState.role==='ADMIN'){
             //If logged in user is an Admin
             history.push('/admin')
           }

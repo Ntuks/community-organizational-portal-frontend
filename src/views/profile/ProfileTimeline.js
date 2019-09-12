@@ -18,7 +18,7 @@ function ProfileTimeline(props) {
             null
             ) : (
                 props.projects.map((project) => {
-                return  <ProfilePost key={project._id} postType ="Project" {...project} isOwner ={props.isOwner} id = {project._id} />;
+                return  <ProfilePost key={project._id} postType ="Project" {...project} isOwner ={props.isOwner} _id = {project._id} />;
                 })
             )
         
@@ -30,7 +30,7 @@ function ProfileTimeline(props) {
             null
             ) : (
                 props.campaigns.map((campaign) => {
-                return  <ProfilePost key={campaign._id} postType ="Campaign" {...campaign} isOwner ={props.isOwner} id = {campaign._id} />;
+                return  <ProfilePost key={campaign._id} postType ="Campaign" {...campaign} isOwner ={props.isOwner} _id = {campaign._id} />;
                 })
             )
         

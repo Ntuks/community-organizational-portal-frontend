@@ -10,7 +10,7 @@ export const AdminRoute = ({
   ...rest
 }) => (
     <Route {...rest} component={(props) => (
-      isAuthenticated && role==='Admin' ? (
+      isAuthenticated && role==='ADMIN' ? (
         <div>
           <Component {...props} />
         </div>

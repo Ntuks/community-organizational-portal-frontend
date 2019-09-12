@@ -15,11 +15,13 @@ export const startAddProject = (projectData,postType) => {
       description = '',
       duration = '',
       poster = '',
+      time = '',
+      location = ''
     } = projectData;
-    const project = { title, description, duration, poster };
+    const project = { title, description, duration, poster, time, location };
     
     //push to DB 
-    console.log(project);
+    //console.log(project);
 
     createPost(project,postType).then((response) =>{
       if(typeof (response.data.message) !== 'undefined'){
@@ -101,9 +103,9 @@ export const startEditProject = (_id, updates, postType) => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
     // return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
-      editPost(_id, updates, postType).then(()=>{
+      //editPost(_id, updates, postType).then(()=>{
         dispatch(editProject(_id, updates));
-      })
+      //})
     // });
   };
 };

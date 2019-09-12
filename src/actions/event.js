@@ -22,7 +22,7 @@ export const startAddEvent = (eventData,postType) => {
       const event = { title, description, location , date , time ,poster };
       
       //push to DB 
-      console.log(event);
+      //console.log(event);
   
       createPost(event,postType).then((response) =>{
         if(typeof (response.data.message) !== 'undefined'){

@@ -37,15 +37,14 @@ const useStyles = makeStyles(theme => ({
 export const EditPost = (props)=>{
   const classes = useStyles();
   
-  const {title, description, duration, location,startDate, endDate, postType, isOwner=false ,_id} = props
+  const {title, description, duration, location,date, postType, isOwner=false ,_id} = props
 
   const [values, setValues] = React.useState({
     title: title,
     description:description,
     duration: duration,
     location: location,
-    startDate: startDate,
-    endDate: endDate,
+    date: date,
     postType: postType,
   });
 
@@ -110,19 +109,12 @@ export const EditPost = (props)=>{
 
         <TextField placeholder="startDate"
         className={classes.title}
-        name="startDate"
-        value={values.startDate}
+        name="date"
+        value={values.date}
         onChange={handleChange}
         >
         </TextField>
 
-        <TextField placeholder="endDate"
-        className={classes.title}
-        name="endDate"
-        value={values.endDate}
-        onChange={handleChange}
-        >
-        </TextField>
 
           <Select
               className = {classes.select}
