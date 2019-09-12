@@ -1,57 +1,55 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import EditIcon from '@material-ui/icons/Edit';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import EditIcon from "@material-ui/icons/Edit";
 
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 
-import EditProfileDetails from './editProfileDetails';
+import EditProfileDetails from "./editProfileDetails";
 
-const useStyles = makeStyles(theme =>({
+const useStyles = makeStyles(theme => ({
   card: {
     minWidth: 275,
-    height: "100%",
+    height: "100%"
   },
   bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)"
   },
   title: {
-    fontSize: 14,
+    fontSize: 14
   },
   pos: {
-    marginBottom: 12,
+    marginBottom: 12
   },
-  editIconPanel:{
+  editIconPanel: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
-  editIcon:{
-    '&:hover': {
-      cursor: 'pointer'
-    },
+  editIcon: {
+    "&:hover": {
+      cursor: "pointer"
+    }
   },
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  
-})
-);
+    padding: theme.spacing(2, 4, 3)
+  }
+}));
 
 function SimpleCard(props) {
   const classes = useStyles();
@@ -59,57 +57,86 @@ function SimpleCard(props) {
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
-    console.log('test', props)
-    
+    console.log("test", props);
   });
 
-  function handleEditProfile(){
+  function handleEditProfile() {
     setOpen(true);
   }
-  
+
   function handleClose() {
     setOpen(false);
-  };
+  }
 
   return (
     <Card className={classes.card}>
       <CardContent>
-      {console.log('fycasd',props.organisation)}
+        {console.log("fycasd", props.organisation)}
 
-        <Typography variant="h3" component="h3" className={classes.editIconPanel}>
-        Organisation Bio  {props.isOwner &&<EditIcon onClick={handleEditProfile} className={classes.editIcon} />}
+        <Typography
+          variant="h3"
+          component="h3"
+          className={classes.editIconPanel}
+        >
+          Organisation Bio{" "}
+          {props.isOwner && (
+            <EditIcon
+              onClick={handleEditProfile}
+              className={classes.editIcon}
+            />
+          )}
         </Typography>
-       
+
         <Typography className={classes.title} color="textSecondary">
-         Full Description
-      </Typography>
+          Full Description
+        </Typography>
         <Typography className={classes.pos} color="textSecondary">
-            {props.organisation.description}
+          {props.organisation.description}
         </Typography>
 
         <Typography variant="h5" component="span">
-            Areas of engagement:
+          Areas of engagement:
         </Typography>
-        <Typography variant="body2" >  {props.organisation.areasOfEngagement||"n/a"} </Typography>
+        <Typography variant="body2">
+          {" "}
+          {props.organisation.areasOfEngagement || "n/a"}{" "}
+        </Typography>
 
-        <div><br></br></div>
+        <div>
+          <br></br>
+        </div>
         <Typography variant="h5" component="span">
-            Location:
+          Location:
         </Typography>
-        <Typography variant="body2" >  {props.organisation.location} </Typography>
-        <div><br></br></div>
+        <Typography variant="body2"> {props.organisation.location} </Typography>
+        <div>
+          <br></br>
+        </div>
         <Typography variant="h5" component="span">
-              PBO/NPO Number:
-          </Typography>
-          <Typography variant="body2" >  {props.organisation.pboNpoNumber||"n/a"} </Typography>
-        <div><br></br></div>
-        <Typography variant="h5" component="span">
-            Contact Details:
+          PBO/NPO Number:
         </Typography>
-        <Typography variant="body2" component="p"> Email: {props.organisation.email || ""} </Typography>
-        <Typography variant="body2" component="p"> Tel: {props.organisation.contactNo} </Typography>
-        <Typography variant="body2" component="p"> Facebook Link: {props.organisation.pboNpoNumber}</Typography>
-        
+        <Typography variant="body2">
+          {" "}
+          {props.organisation.pboNpoNumber || "n/a"}{" "}
+        </Typography>
+        <div>
+          <br></br>
+        </div>
+        <Typography variant="h5" component="span">
+          Contact Details:
+        </Typography>
+        <Typography variant="body2" component="p">
+          {" "}
+          Email: {props.organisation.email || ""}{" "}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {" "}
+          Tel: {props.organisation.contactNo}{" "}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {" "}
+          Facebook Link: {props.organisation.facebookPagelink}
+        </Typography>
       </CardContent>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -120,14 +147,17 @@ function SimpleCard(props) {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 500
         }}
       >
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Oganisation Profile Details </h2>
             <div id="transition-modal-description">
-              <EditProfileDetails organisation={props.organisation} handleClose={handleClose}/>
+              <EditProfileDetails
+                organisation={props.organisation}
+                handleClose={handleClose}
+              />
             </div>
           </div>
         </Fade>
@@ -136,6 +166,4 @@ function SimpleCard(props) {
   );
 }
 
-
-
-export default (SimpleCard);
+export default SimpleCard;
