@@ -32,11 +32,17 @@ import EditPost from './editPost'
 
 const useStyles = makeStyles(theme => ({
   card: {
-    
+    "background-size": "contain",
+    height: "100%",
+    padding: 0
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    padding: "50px",
+    "background-size": "contain",
+    "background-repeat": "no-repeat",
+    "background-position": "50% 50%",
+    "background-image": "80%",
+    height: "50%",
   },
   expand: {
     transform: 'rotate(0deg)',
