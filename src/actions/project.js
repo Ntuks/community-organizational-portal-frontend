@@ -1,4 +1,4 @@
-import {getProjects, createPost, editPost, deleteProject} from '../helpers/requests'
+import {getProjects, createPost, editPost, deleteProject,getOrganisationsPosts} from '../helpers/requests'
 import {startLogout } from './auth'
 import {history} from '../routers/AppRouter'
 
@@ -60,6 +60,15 @@ export const startSetProjects = (projects) => {
     })
   };
 };
+
+export const startPopulateProjectsCampaignsAndEvents = (id)=>{
+  return (dispatch, getState) => {
+      getOrganisationsPosts(id).then( (response)=>{
+          console.log("post ntuthuko : ",response)
+      })
+  }
+}
+
 
 export const clearProjects = () => ({
   type: 'CLEAR_PROJECT'

@@ -250,6 +250,13 @@ function deleteEvent(_id) {
     });
 }
 
+
+function getOrganisationsPosts(_id) {
+  return axios.get(`http://localhost:7900/api/v1/organizations/all-posts/${_id}`).then(response => {
+    const postData = response.data[0] // set this to the store for the organisation logged in
+    return postData;
+  });
+}
 export {
   loginRequest,
   getOrganisation,
@@ -263,5 +270,6 @@ export {
   deleteProject,
   deleteCampaign,
   deleteEvent,
-  editPost
+  editPost,
+  getOrganisationsPosts
 };

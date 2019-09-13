@@ -155,11 +155,11 @@ export function ProfilePost(props) {
       <CardActions disableSpacing>
       {isOwner?
         <div>
-            <IconButton aria-label="edit">
-              <CreateIcon onClick={handleEdit}/>
+            <IconButton aria-label="edit" onClick={handleEdit}>
+              <CreateIcon />
             </IconButton>
-            <IconButton aria-label="delete">
-              <DeleteIcon onClick={handleDelete} />
+            <IconButton aria-label="delete" onClick={handleDelete}>
+              <DeleteIcon  />
             </IconButton>
         </div>
         : null

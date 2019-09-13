@@ -6,7 +6,7 @@ import ProfileBanner from './ProfileBanner'
 import ProfileAbout from './ProfileAbout'
 import ProfileTimeline from './ProfileTimeline'
 
-import {startSetProjects, startclearProjects} from '../../actions/project';
+import {startSetProjects, startclearProjects, startPopulateProjectsCampaignsAndEvents} from '../../actions/project';
 import {startSetCampaigns, startclearCampaigns} from '../../actions/campaign'
 import {startSetEvents, startclearEvents} from '../../actions/event'
 
@@ -29,6 +29,11 @@ export const Profile  = (props) => {
                 props.startclearProject() 
                 props.startclearCampaign()
                 props.startclearEvent()
+                //setprojects, campagings and events to the id of the organisation.
+                const path = history.location.pathname
+                const id = path.substring(path.indexOf(':')+1).trim()
+                //console.log(id)
+                props.startPopulateProjectsCampaignsAndEvents(id)
             
             }
                 
@@ -73,7 +78,7 @@ const findOrg = (organisations, authOrg) =>{
     //console.log(authOrg);
     const path = history.location.pathname
     const id = path.substring(path.indexOf(':')+1).trim()
-    console.log(id)
+    //console.log(id)
     //console.log("banter : ", id);
     if(Object.keys(authOrg).length > 0 && authOrg.role !=="ADMIN") {
         //console.log('authorg',authOrg)
@@ -99,6 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
     startSetEvent: ()=> dispatch(startSetEvents()),
     startclearProject: ()=>dispatch (startclearProjects()),
     startclearCampaign: ()=>dispatch(startclearCampaigns()),
-    startclearEvent: ()=> dispatch(startclearEvents())
+    startclearEvent: ()=> dispatch(startclearEvents()),
+    startPopulateProjectsCampaignsAndEvents: (id)=>dispatch(startPopulateProjectsCampaignsAndEvents(id))
   });
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

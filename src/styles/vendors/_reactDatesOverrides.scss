@@ -24,11 +24,11 @@
 //   .CalendarDay__hovered_span {
 //     background: lightblue;
 //   }
-// .DateRangePicker{
+.DayPicker_transitionContainer{
     
-//     border-right: 2px solid black;
+    overflow: auto
 
-//   }
+  }
 
   .DateRangePicker_picker  {
     background-color: red;
