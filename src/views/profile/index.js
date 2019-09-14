@@ -32,7 +32,7 @@ export const Profile  = (props) => {
                 //setprojects, campagings and events to the id of the organisation.
                 const path = history.location.pathname
                 const id = path.substring(path.indexOf(':')+1).trim()
-                //console.log(id)
+                console.log(id)
                 props.startPopulateProjectsCampaignsAndEvents(id)
             
             }

@@ -26,7 +26,7 @@ function loginRequest(email, password) {
           ...response.data.orgManager,
           token: response.data.token
         };
-
+        alert("login response returned")
         //axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`  // for all post requests the token will now be in the header
 
         // sets cookie in header for all
@@ -253,7 +253,8 @@ function deleteEvent(_id) {
 
 function getOrganisationsPosts(_id) {
   return axios.get(`http://localhost:7900/api/v1/organizations/all-posts/${_id}`).then(response => {
-    const postData = response.data[0] // set this to the store for the organisation logged in
+    console.log(response)
+    const postData = response.data // set this to the store for the organisation logged in
     return postData;
   });
 }

@@ -175,6 +175,7 @@ const SignIn = ({startLogin, login}) => {
 
   const handleLogIn = event => {
     event.preventDefault();
+    
     startLogin({email:formState.values.email ,password:formState.values.password}).then((loginState)=>{
       
       try {

@@ -2,6 +2,9 @@ import {getProjects, createPost, editPost, deleteProject,getOrganisationsPosts} 
 import {startLogout } from './auth'
 import {history} from '../routers/AppRouter'
 
+import {setCampaigns} from './campaign'
+import {setEvents} from './event'
+
 export const addProject = (project) => ({
   type: 'ADD_PROJECT',
   project: project
@@ -64,7 +67,10 @@ export const startSetProjects = (projects) => {
 export const startPopulateProjectsCampaignsAndEvents = (id)=>{
   return (dispatch, getState) => {
       getOrganisationsPosts(id).then( (response)=>{
-          console.log("post ntuthuko : ",response)
+          // console.log(response.posts.projects)
+          dispatch(setProjects(response.posts.projects))
+          dispatch(setCampaigns(response.posts.campaigns))
+          dispatch(setEvents(response.posts.events))
       })
   }
 }

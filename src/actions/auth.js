@@ -14,7 +14,7 @@ export const startLogin = ({ email, password }) => {
 
   return (dispatch, getState) => {
     return loginRequest(email, password).then(loginState => {
-      console.log(loginState);
+      //console.log(loginState);
       if (loginState.role === "Organization Manager") {
         return getOrganisation(loginState.organization)
           .then(orgData => {
